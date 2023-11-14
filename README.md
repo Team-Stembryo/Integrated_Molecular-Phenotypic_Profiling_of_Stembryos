@@ -13,18 +13,29 @@ authored by:
 - Aayush Poddar 1,
 - Aydan Bulut-Karslioglu 3,
 - Jesse V Veenvliet 1,5,6,12,*
-- 
+
 1 Stembryogenesis Lab, Max Planck Institute of Molecular Cell Biology and Genetics, Dresden, Germany
+
 2 Faculty of Biology, Technische Universität Dresden, Dresden, Germany
+
 3 Stem Cell Chromatin Lab,  Dept.  of Genome Regulation, Max Planck Institute for Molecular Genetics, Germany
+
 4 Department of Genome Regulation, Max Planck Institute for Molecular Genetics, Germany
+
 5 Cluster of Excellence Physics of Life, Technische Universität Dresden, Dresden, Germany
+
 6 Center for Systems Biology Dresden, Dresden, Germany
+
 7 Present address: Max Delbrück Center for Molecular Medicine (MDC), Berlin, Germany
+
 8 Present address: The Francis Crick Institute, London, United Kingdom
+
 9 Present address: Department of Genetics, Yale School of Medicine, Yale University, New Haven, CT, USA
+
 10 These authors contributed equally to this work and should be considered shared first authors
+
 11 These authors contributed equally to this work and should be considered shared second authors
+
 12 Lead contact
 
 DOI: 
