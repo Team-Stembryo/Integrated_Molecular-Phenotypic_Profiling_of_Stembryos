@@ -1,0 +1,97 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Loading the library
+```{r}
+library(Seurat)
+```
+
+Setting the working directory (replace with this directory or directory which includes MULTI-seq R-Objects)
+```{r}
+setwd("C:/Users/savill/OneDrive/Documents/PhD Jesse/R-Objects")
+```
+Loading the data (Replace with location for R-Object)
+```{r}
+# load my data
+Gastruloid_96h_merged_afterQC <- readRDS("./df96v2.rds")
+
+Gastruloid_96h_merged_afterQC
+DefaultAssay(Gastruloid_96h_merged_afterQC) <- "SCT"
+
+Gastruloid_96h_merged_afterQC <- SetIdent(Gastruloid_96h_merged_afterQC, value = "predicted.id")
+```
+Getting the metadata and taking a peak:
+```{r}
+metadata <- Gastruloid_96h_merged_afterQC@meta.data
+head(metadata)
+```
+Get all the columns so we can delete the old morphology info:
+```{r}
+colnames(metadata)
+```
+```{r}
+all_features = colnames(metadata)
+old_morpho_features = c("Area","Perim","Major","Minor","Feret","MinFeret","AR","Round","Solidity","BRA_Area","BRA_Mean","BRA_Major","BRA_Minor","BRA_Circ","BRA_AR","BRA_Round","BRA_Solidity","BRA_Fraction")
+metadata_old_removed = metadata[!(all_features %in% old_morpho_features)]
+#index_name = "row_names"
+#metadata_old_removed[, index_name] <- rownames(metadata_old_removed)
+
+metadata_old_removed
+
+```
+Now we can move on to loading the new features and adding them to the metadata:
+```{r}
+my_data_96h = read.csv("Morphodata_All_Features_Sequenced_096h.csv")
+dim(my_data_96h)
+my_data_96h
+```
+Adding the identifier so we can merge the dataframes:
+```{r}
+# if this is how we add the barcode identifyer it is CRITICAL that the order is the same as in the spreadsheet
+# This means A1-A12 INSTEAD of A10,A11,A12,A1,A2 (which is the default order in python and pandas)
+barcoder_identifier = "bar"
+my_data_96h[barcoder_identifier] <- paste("Bar", c(1:24), sep="")
+my_data_96h
+```
+## Add info to metadata
+Here I am basically excluding the columns we don't want to add, assuming that we want to add all columns that are in the .csv file. Alternatively we could specify which columns (or which features) we want to add to the seurat object manually. No matter which way it is done we would have to add the sample barcode to be able to merge the data with the existing metadata.
+```{r}
+all_columns = colnames(my_data_96h)
+columns_we_dont_need = c('Sample','Multi_BC','Multi_BC_#','Plate','Morphotype_120h','Axes','Morpho_120h','Morphotype_96h',barcoder_identifier)
+columns_we_need = all_columns[!(all_columns %in% columns_we_dont_need)]
+
+
+for (feature_name in columns_we_need) {
+  metadata_old_removed[feature_name]<- my_data_96h[[feature_name]][match(metadata_old_removed$Sample.barcode, my_data_96h[[barcoder_identifier]])]
+} 
+metadata_old_removed
+```
+
+actually adding the metadata to the Seurat object. One thing to do beforehand is removing the old morpho data from the seurat object
+```{r}
+
+for (x in old_morpho_features) {
+  Gastruloid_96h_merged_afterQC@meta.data[[x]]=NULL
+} 
+
+head(Gastruloid_96h_merged_afterQC@meta.data)
+```
+Now we can add the new metadata
+```{r}
+for (feature_name in columns_we_need){
+  Gastruloid_96h_merged_afterQC <- AddMetaData(object = Gastruloid_96h_merged_afterQC, metadata = metadata_old_removed[[feature_name]], col.name = feature_name)
+}
+
+# Now we can look at the final dataframe:
+Gastruloid_96h_merged_afterQC@meta.data
+```
+checking the column_names
+```{r}
+colnames(Gastruloid_96h_merged_afterQC@meta.data)
+```
+Now we can save this monstrosity to disc:
+```{r}
+saveRDS(Gastruloid_96h_merged_afterQC, file = "df96v2_updated_morphodata.rds")
+```
