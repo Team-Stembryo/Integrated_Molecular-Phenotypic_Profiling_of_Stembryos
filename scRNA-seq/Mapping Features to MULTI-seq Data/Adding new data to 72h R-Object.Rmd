@@ -8,11 +8,11 @@ Loading the library
 library(Seurat)
 ```
 
-Setting the working directory
+Setting the working directory (replace with this directory or directory which includes MULTI-seq R-Objects)
 ```{r}
 setwd("C:/Users/savill/OneDrive/Documents/PhD Jesse/R-Objects")
 ```
-Loading the data
+Loading the data (Replace with location for R-Object)
 ```{r}
 # load my data
 Gastruloid_72h_merged_afterQC <- readRDS("./df72v3.rds")
