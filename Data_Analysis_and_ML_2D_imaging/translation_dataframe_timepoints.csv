@@ -1,0 +1,497 @@
+,original_names,plot_names
+0,048h_raw_BF_AreaShape_area,048h-[Area]-BF
+1,048h_raw_BF_AreaShape_aspect_ratio,048h-[Aspect Ratio]-BF
+2,048h_raw_BF_AreaShape_axis_major_length,048h-[Axis Major Length]-BF
+3,048h_raw_BF_AreaShape_axis_minor_length,048h-[Axis Minor Length]-BF
+4,048h_raw_BF_AreaShape_eccentricity,048h-[Eccentricity]-BF
+5,048h_raw_BF_AreaShape_feret_diameter_max,048h-[Feret Diameter Max]-BF
+6,048h_raw_BF_AreaShape_perimeter,048h-[Perimeter]-BF
+7,048h_raw_BF_AreaShape_solidity,048h-[Solidity]-BF
+8,048h_str_BF_AreaShape_area,048h-[str Area]-BF
+9,048h_str_BF_AreaShape_aspect_ratio,048h-[str Aspect Ratio]-BF
+10,048h_str_BF_AreaShape_eccentricity,048h-[str Eccentricity]-BF
+11,048h_str_BF_AreaShape_equivalent_diameter,048h-[str Equivalent Diameter]-BF
+12,048h_str_BF_AreaShape_extent,048h-[str Extent]-BF
+13,048h_str_BF_AreaShape_form_factor,048h-[str Form Factor]-BF
+14,048h_str_BF_AreaShape_inertia_tensor_0_0,048h-[str Inertia Tensor 0 0]-BF
+15,048h_str_BF_AreaShape_inertia_tensor_0_1,048h-[str Inertia Tensor 0 1]-BF
+16,048h_str_BF_AreaShape_inertia_tensor_1_0,048h-[str Inertia Tensor 1 0]-BF
+17,048h_str_BF_AreaShape_inertia_tensor_1_1,048h-[str Inertia Tensor 1 1]-BF
+18,048h_str_BF_AreaShape_inertia_tensor_eigvals_0,048h-[str Inertia Tensor Eigvals 0]-BF
+19,048h_str_BF_AreaShape_inertia_tensor_eigvals_1,048h-[str Inertia Tensor Eigvals 1]-BF
+20,048h_str_BF_AreaShape_locoefa_PC_1,048h-[str LoCo EFA Pc 1]-BF
+21,048h_str_BF_AreaShape_locoefa_PC_2,048h-[str LoCo EFA Pc 2]-BF
+22,048h_str_BF_AreaShape_locoefa_PC_3,048h-[str LoCo EFA Pc 3]-BF
+23,048h_str_BF_AreaShape_locoefa_PC_4,048h-[str LoCo EFA Pc 4]-BF
+24,048h_str_BF_AreaShape_locoefa_PC_5,048h-[str LoCo EFA Pc 5]-BF
+25,048h_str_BF_AreaShape_locoefa_UMAP_1,048h-[str LoCo EFA Umap 1]-BF
+26,048h_str_BF_AreaShape_locoefa_UMAP_2,048h-[str LoCo EFA Umap 2]-BF
+27,048h_str_BF_AreaShape_locoefa_UMAP_3,048h-[str LoCo EFA Umap 3]-BF
+28,048h_str_BF_AreaShape_locoefa_coeff_0,048h-[str LoCo EFA Coeff 0]-BF
+29,048h_str_BF_AreaShape_locoefa_coeff_1,048h-[str LoCo EFA Coeff 1]-BF
+30,048h_str_BF_AreaShape_locoefa_coeff_10,048h-[str LoCo EFA Coeff 10]-BF
+31,048h_str_BF_AreaShape_locoefa_coeff_11,048h-[str LoCo EFA Coeff 11]-BF
+32,048h_str_BF_AreaShape_locoefa_coeff_12,048h-[str LoCo EFA Coeff 12]-BF
+33,048h_str_BF_AreaShape_locoefa_coeff_13,048h-[str LoCo EFA Coeff 13]-BF
+34,048h_str_BF_AreaShape_locoefa_coeff_14,048h-[str LoCo EFA Coeff 14]-BF
+35,048h_str_BF_AreaShape_locoefa_coeff_15,048h-[str LoCo EFA Coeff 15]-BF
+36,048h_str_BF_AreaShape_locoefa_coeff_16,048h-[str LoCo EFA Coeff 16]-BF
+37,048h_str_BF_AreaShape_locoefa_coeff_17,048h-[str LoCo EFA Coeff 17]-BF
+38,048h_str_BF_AreaShape_locoefa_coeff_18,048h-[str LoCo EFA Coeff 18]-BF
+39,048h_str_BF_AreaShape_locoefa_coeff_19,048h-[str LoCo EFA Coeff 19]-BF
+40,048h_str_BF_AreaShape_locoefa_coeff_2,048h-[str LoCo EFA Coeff 2]-BF
+41,048h_str_BF_AreaShape_locoefa_coeff_20,048h-[str LoCo EFA Coeff 20]-BF
+42,048h_str_BF_AreaShape_locoefa_coeff_21,048h-[str LoCo EFA Coeff 21]-BF
+43,048h_str_BF_AreaShape_locoefa_coeff_22,048h-[str LoCo EFA Coeff 22]-BF
+44,048h_str_BF_AreaShape_locoefa_coeff_23,048h-[str LoCo EFA Coeff 23]-BF
+45,048h_str_BF_AreaShape_locoefa_coeff_24,048h-[str LoCo EFA Coeff 24]-BF
+46,048h_str_BF_AreaShape_locoefa_coeff_25,048h-[str LoCo EFA Coeff 25]-BF
+47,048h_str_BF_AreaShape_locoefa_coeff_26,048h-[str LoCo EFA Coeff 26]-BF
+48,048h_str_BF_AreaShape_locoefa_coeff_27,048h-[str LoCo EFA Coeff 27]-BF
+49,048h_str_BF_AreaShape_locoefa_coeff_28,048h-[str LoCo EFA Coeff 28]-BF
+50,048h_str_BF_AreaShape_locoefa_coeff_29,048h-[str LoCo EFA Coeff 29]-BF
+51,048h_str_BF_AreaShape_locoefa_coeff_3,048h-[str LoCo EFA Coeff 3]-BF
+52,048h_str_BF_AreaShape_locoefa_coeff_30,048h-[str LoCo EFA Coeff 30]-BF
+53,048h_str_BF_AreaShape_locoefa_coeff_31,048h-[str LoCo EFA Coeff 31]-BF
+54,048h_str_BF_AreaShape_locoefa_coeff_32,048h-[str LoCo EFA Coeff 32]-BF
+55,048h_str_BF_AreaShape_locoefa_coeff_33,048h-[str LoCo EFA Coeff 33]-BF
+56,048h_str_BF_AreaShape_locoefa_coeff_34,048h-[str LoCo EFA Coeff 34]-BF
+57,048h_str_BF_AreaShape_locoefa_coeff_35,048h-[str LoCo EFA Coeff 35]-BF
+58,048h_str_BF_AreaShape_locoefa_coeff_36,048h-[str LoCo EFA Coeff 36]-BF
+59,048h_str_BF_AreaShape_locoefa_coeff_37,048h-[str LoCo EFA Coeff 37]-BF
+60,048h_str_BF_AreaShape_locoefa_coeff_38,048h-[str LoCo EFA Coeff 38]-BF
+61,048h_str_BF_AreaShape_locoefa_coeff_39,048h-[str LoCo EFA Coeff 39]-BF
+62,048h_str_BF_AreaShape_locoefa_coeff_4,048h-[str LoCo EFA Coeff 4]-BF
+63,048h_str_BF_AreaShape_locoefa_coeff_40,048h-[str LoCo EFA Coeff 40]-BF
+64,048h_str_BF_AreaShape_locoefa_coeff_41,048h-[str LoCo EFA Coeff 41]-BF
+65,048h_str_BF_AreaShape_locoefa_coeff_42,048h-[str LoCo EFA Coeff 42]-BF
+66,048h_str_BF_AreaShape_locoefa_coeff_43,048h-[str LoCo EFA Coeff 43]-BF
+67,048h_str_BF_AreaShape_locoefa_coeff_44,048h-[str LoCo EFA Coeff 44]-BF
+68,048h_str_BF_AreaShape_locoefa_coeff_45,048h-[str LoCo EFA Coeff 45]-BF
+69,048h_str_BF_AreaShape_locoefa_coeff_46,048h-[str LoCo EFA Coeff 46]-BF
+70,048h_str_BF_AreaShape_locoefa_coeff_47,048h-[str LoCo EFA Coeff 47]-BF
+71,048h_str_BF_AreaShape_locoefa_coeff_48,048h-[str LoCo EFA Coeff 48]-BF
+72,048h_str_BF_AreaShape_locoefa_coeff_49,048h-[str LoCo EFA Coeff 49]-BF
+73,048h_str_BF_AreaShape_locoefa_coeff_5,048h-[str LoCo EFA Coeff 5]-BF
+74,048h_str_BF_AreaShape_locoefa_coeff_50,048h-[str LoCo EFA Coeff 50]-BF
+75,048h_str_BF_AreaShape_locoefa_coeff_51,048h-[str LoCo EFA Coeff 51]-BF
+76,048h_str_BF_AreaShape_locoefa_coeff_6,048h-[str LoCo EFA Coeff 6]-BF
+77,048h_str_BF_AreaShape_locoefa_coeff_7,048h-[str LoCo EFA Coeff 7]-BF
+78,048h_str_BF_AreaShape_locoefa_coeff_8,048h-[str LoCo EFA Coeff 8]-BF
+79,048h_str_BF_AreaShape_locoefa_coeff_9,048h-[str LoCo EFA Coeff 9]-BF
+80,048h_str_BF_AreaShape_major_axis_length,048h-[str Major Axis Length]-BF
+81,048h_str_BF_AreaShape_minor_axis_length,048h-[str Minor Axis Length]-BF
+82,048h_str_BF_AreaShape_moments_hu_0,048h-[str Moments Hu 0]-BF
+83,048h_str_BF_AreaShape_moments_hu_1,048h-[str Moments Hu 1]-BF
+84,048h_str_BF_AreaShape_moments_hu_2,048h-[str Moments Hu 2]-BF
+85,048h_str_BF_AreaShape_moments_hu_3,048h-[str Moments Hu 3]-BF
+86,048h_str_BF_AreaShape_moments_hu_4,048h-[str Moments Hu 4]-BF
+87,048h_str_BF_AreaShape_moments_hu_5,048h-[str Moments Hu 5]-BF
+88,048h_str_BF_AreaShape_moments_hu_6,048h-[str Moments Hu 6]-BF
+89,048h_str_BF_AreaShape_orientation,048h-[str Orientation]-BF
+90,048h_str_BF_AreaShape_perimeter,048h-[str Perimeter]-BF
+91,072h_raw_BF_AreaShape_area,072h-[Area]-BF
+92,072h_raw_BF_AreaShape_aspect_ratio,072h-[Aspect Ratio]-BF
+93,072h_raw_BF_AreaShape_axis_major_length,072h-[Axis Major Length]-BF
+94,072h_raw_BF_AreaShape_axis_minor_length,072h-[Axis Minor Length]-BF
+95,072h_raw_BF_AreaShape_eccentricity,072h-[Eccentricity]-BF
+96,072h_raw_BF_AreaShape_feret_diameter_max,072h-[Feret Diameter Max]-BF
+97,072h_raw_BF_AreaShape_perimeter,072h-[Perimeter]-BF
+98,072h_raw_BF_AreaShape_solidity,072h-[Solidity]-BF
+99,072h_str_BF_AreaShape_area,072h-[str Area]-BF
+100,072h_str_BF_AreaShape_aspect_ratio,072h-[str Aspect Ratio]-BF
+101,072h_str_BF_AreaShape_eccentricity,072h-[str Eccentricity]-BF
+102,072h_str_BF_AreaShape_equivalent_diameter,072h-[str Equivalent Diameter]-BF
+103,072h_str_BF_AreaShape_extent,072h-[str Extent]-BF
+104,072h_str_BF_AreaShape_form_factor,072h-[str Form Factor]-BF
+105,072h_str_BF_AreaShape_inertia_tensor_0_0,072h-[str Inertia Tensor 0 0]-BF
+106,072h_str_BF_AreaShape_inertia_tensor_0_1,072h-[str Inertia Tensor 0 1]-BF
+107,072h_str_BF_AreaShape_inertia_tensor_1_0,072h-[str Inertia Tensor 1 0]-BF
+108,072h_str_BF_AreaShape_inertia_tensor_1_1,072h-[str Inertia Tensor 1 1]-BF
+109,072h_str_BF_AreaShape_inertia_tensor_eigvals_0,072h-[str Inertia Tensor Eigvals 0]-BF
+110,072h_str_BF_AreaShape_inertia_tensor_eigvals_1,072h-[str Inertia Tensor Eigvals 1]-BF
+111,072h_str_BF_AreaShape_locoefa_PC_1,072h-[str LoCo EFA Pc 1]-BF
+112,072h_str_BF_AreaShape_locoefa_PC_2,072h-[str LoCo EFA Pc 2]-BF
+113,072h_str_BF_AreaShape_locoefa_PC_3,072h-[str LoCo EFA Pc 3]-BF
+114,072h_str_BF_AreaShape_locoefa_PC_4,072h-[str LoCo EFA Pc 4]-BF
+115,072h_str_BF_AreaShape_locoefa_PC_5,072h-[str LoCo EFA Pc 5]-BF
+116,072h_str_BF_AreaShape_locoefa_UMAP_1,072h-[str LoCo EFA Umap 1]-BF
+117,072h_str_BF_AreaShape_locoefa_UMAP_2,072h-[str LoCo EFA Umap 2]-BF
+118,072h_str_BF_AreaShape_locoefa_UMAP_3,072h-[str LoCo EFA Umap 3]-BF
+119,072h_str_BF_AreaShape_locoefa_coeff_0,072h-[str LoCo EFA Coeff 0]-BF
+120,072h_str_BF_AreaShape_locoefa_coeff_1,072h-[str LoCo EFA Coeff 1]-BF
+121,072h_str_BF_AreaShape_locoefa_coeff_10,072h-[str LoCo EFA Coeff 10]-BF
+122,072h_str_BF_AreaShape_locoefa_coeff_11,072h-[str LoCo EFA Coeff 11]-BF
+123,072h_str_BF_AreaShape_locoefa_coeff_12,072h-[str LoCo EFA Coeff 12]-BF
+124,072h_str_BF_AreaShape_locoefa_coeff_13,072h-[str LoCo EFA Coeff 13]-BF
+125,072h_str_BF_AreaShape_locoefa_coeff_14,072h-[str LoCo EFA Coeff 14]-BF
+126,072h_str_BF_AreaShape_locoefa_coeff_15,072h-[str LoCo EFA Coeff 15]-BF
+127,072h_str_BF_AreaShape_locoefa_coeff_16,072h-[str LoCo EFA Coeff 16]-BF
+128,072h_str_BF_AreaShape_locoefa_coeff_17,072h-[str LoCo EFA Coeff 17]-BF
+129,072h_str_BF_AreaShape_locoefa_coeff_18,072h-[str LoCo EFA Coeff 18]-BF
+130,072h_str_BF_AreaShape_locoefa_coeff_19,072h-[str LoCo EFA Coeff 19]-BF
+131,072h_str_BF_AreaShape_locoefa_coeff_2,072h-[str LoCo EFA Coeff 2]-BF
+132,072h_str_BF_AreaShape_locoefa_coeff_20,072h-[str LoCo EFA Coeff 20]-BF
+133,072h_str_BF_AreaShape_locoefa_coeff_21,072h-[str LoCo EFA Coeff 21]-BF
+134,072h_str_BF_AreaShape_locoefa_coeff_22,072h-[str LoCo EFA Coeff 22]-BF
+135,072h_str_BF_AreaShape_locoefa_coeff_23,072h-[str LoCo EFA Coeff 23]-BF
+136,072h_str_BF_AreaShape_locoefa_coeff_24,072h-[str LoCo EFA Coeff 24]-BF
+137,072h_str_BF_AreaShape_locoefa_coeff_25,072h-[str LoCo EFA Coeff 25]-BF
+138,072h_str_BF_AreaShape_locoefa_coeff_26,072h-[str LoCo EFA Coeff 26]-BF
+139,072h_str_BF_AreaShape_locoefa_coeff_27,072h-[str LoCo EFA Coeff 27]-BF
+140,072h_str_BF_AreaShape_locoefa_coeff_28,072h-[str LoCo EFA Coeff 28]-BF
+141,072h_str_BF_AreaShape_locoefa_coeff_29,072h-[str LoCo EFA Coeff 29]-BF
+142,072h_str_BF_AreaShape_locoefa_coeff_3,072h-[str LoCo EFA Coeff 3]-BF
+143,072h_str_BF_AreaShape_locoefa_coeff_30,072h-[str LoCo EFA Coeff 30]-BF
+144,072h_str_BF_AreaShape_locoefa_coeff_31,072h-[str LoCo EFA Coeff 31]-BF
+145,072h_str_BF_AreaShape_locoefa_coeff_32,072h-[str LoCo EFA Coeff 32]-BF
+146,072h_str_BF_AreaShape_locoefa_coeff_33,072h-[str LoCo EFA Coeff 33]-BF
+147,072h_str_BF_AreaShape_locoefa_coeff_34,072h-[str LoCo EFA Coeff 34]-BF
+148,072h_str_BF_AreaShape_locoefa_coeff_35,072h-[str LoCo EFA Coeff 35]-BF
+149,072h_str_BF_AreaShape_locoefa_coeff_36,072h-[str LoCo EFA Coeff 36]-BF
+150,072h_str_BF_AreaShape_locoefa_coeff_37,072h-[str LoCo EFA Coeff 37]-BF
+151,072h_str_BF_AreaShape_locoefa_coeff_38,072h-[str LoCo EFA Coeff 38]-BF
+152,072h_str_BF_AreaShape_locoefa_coeff_39,072h-[str LoCo EFA Coeff 39]-BF
+153,072h_str_BF_AreaShape_locoefa_coeff_4,072h-[str LoCo EFA Coeff 4]-BF
+154,072h_str_BF_AreaShape_locoefa_coeff_40,072h-[str LoCo EFA Coeff 40]-BF
+155,072h_str_BF_AreaShape_locoefa_coeff_41,072h-[str LoCo EFA Coeff 41]-BF
+156,072h_str_BF_AreaShape_locoefa_coeff_42,072h-[str LoCo EFA Coeff 42]-BF
+157,072h_str_BF_AreaShape_locoefa_coeff_43,072h-[str LoCo EFA Coeff 43]-BF
+158,072h_str_BF_AreaShape_locoefa_coeff_44,072h-[str LoCo EFA Coeff 44]-BF
+159,072h_str_BF_AreaShape_locoefa_coeff_45,072h-[str LoCo EFA Coeff 45]-BF
+160,072h_str_BF_AreaShape_locoefa_coeff_46,072h-[str LoCo EFA Coeff 46]-BF
+161,072h_str_BF_AreaShape_locoefa_coeff_47,072h-[str LoCo EFA Coeff 47]-BF
+162,072h_str_BF_AreaShape_locoefa_coeff_48,072h-[str LoCo EFA Coeff 48]-BF
+163,072h_str_BF_AreaShape_locoefa_coeff_49,072h-[str LoCo EFA Coeff 49]-BF
+164,072h_str_BF_AreaShape_locoefa_coeff_5,072h-[str LoCo EFA Coeff 5]-BF
+165,072h_str_BF_AreaShape_locoefa_coeff_50,072h-[str LoCo EFA Coeff 50]-BF
+166,072h_str_BF_AreaShape_locoefa_coeff_51,072h-[str LoCo EFA Coeff 51]-BF
+167,072h_str_BF_AreaShape_locoefa_coeff_6,072h-[str LoCo EFA Coeff 6]-BF
+168,072h_str_BF_AreaShape_locoefa_coeff_7,072h-[str LoCo EFA Coeff 7]-BF
+169,072h_str_BF_AreaShape_locoefa_coeff_8,072h-[str LoCo EFA Coeff 8]-BF
+170,072h_str_BF_AreaShape_locoefa_coeff_9,072h-[str LoCo EFA Coeff 9]-BF
+171,072h_str_BF_AreaShape_major_axis_length,072h-[str Major Axis Length]-BF
+172,072h_str_BF_AreaShape_minor_axis_length,072h-[str Minor Axis Length]-BF
+173,072h_str_BF_AreaShape_moments_hu_0,072h-[str Moments Hu 0]-BF
+174,072h_str_BF_AreaShape_moments_hu_1,072h-[str Moments Hu 1]-BF
+175,072h_str_BF_AreaShape_moments_hu_2,072h-[str Moments Hu 2]-BF
+176,072h_str_BF_AreaShape_moments_hu_3,072h-[str Moments Hu 3]-BF
+177,072h_str_BF_AreaShape_moments_hu_4,072h-[str Moments Hu 4]-BF
+178,072h_str_BF_AreaShape_moments_hu_5,072h-[str Moments Hu 5]-BF
+179,072h_str_BF_AreaShape_moments_hu_6,072h-[str Moments Hu 6]-BF
+180,072h_str_BF_AreaShape_orientation,072h-[str Orientation]-BF
+181,072h_str_BF_AreaShape_perimeter,072h-[str Perimeter]-BF
+182,096h_raw_BF_AreaShape_area,096h-[Area]-BF
+183,096h_raw_BF_AreaShape_aspect_ratio,096h-[Aspect Ratio]-BF
+184,096h_raw_BF_AreaShape_axis_major_length,096h-[Axis Major Length]-BF
+185,096h_raw_BF_AreaShape_axis_minor_length,096h-[Axis Minor Length]-BF
+186,096h_raw_BF_AreaShape_eccentricity,096h-[Eccentricity]-BF
+187,096h_raw_BF_AreaShape_feret_diameter_max,096h-[Feret Diameter Max]-BF
+188,096h_raw_BF_AreaShape_perimeter,096h-[Perimeter]-BF
+189,096h_raw_BF_AreaShape_solidity,096h-[Solidity]-BF
+190,096h_str_BF_AreaShape_area,096h-[str Area]-BF
+191,096h_str_BF_AreaShape_aspect_ratio,096h-[str Aspect Ratio]-BF
+192,096h_str_BF_AreaShape_eccentricity,096h-[str Eccentricity]-BF
+193,096h_str_BF_AreaShape_equivalent_diameter,096h-[str Equivalent Diameter]-BF
+194,096h_str_BF_AreaShape_extent,096h-[str Extent]-BF
+195,096h_str_BF_AreaShape_form_factor,096h-[str Form Factor]-BF
+196,096h_str_BF_AreaShape_inertia_tensor_0_0,096h-[str Inertia Tensor 0 0]-BF
+197,096h_str_BF_AreaShape_inertia_tensor_0_1,096h-[str Inertia Tensor 0 1]-BF
+198,096h_str_BF_AreaShape_inertia_tensor_1_0,096h-[str Inertia Tensor 1 0]-BF
+199,096h_str_BF_AreaShape_inertia_tensor_1_1,096h-[str Inertia Tensor 1 1]-BF
+200,096h_str_BF_AreaShape_inertia_tensor_eigvals_0,096h-[str Inertia Tensor Eigvals 0]-BF
+201,096h_str_BF_AreaShape_inertia_tensor_eigvals_1,096h-[str Inertia Tensor Eigvals 1]-BF
+202,096h_str_BF_AreaShape_locoefa_PC_1,096h-[str LoCo EFA Pc 1]-BF
+203,096h_str_BF_AreaShape_locoefa_PC_2,096h-[str LoCo EFA Pc 2]-BF
+204,096h_str_BF_AreaShape_locoefa_PC_3,096h-[str LoCo EFA Pc 3]-BF
+205,096h_str_BF_AreaShape_locoefa_PC_4,096h-[str LoCo EFA Pc 4]-BF
+206,096h_str_BF_AreaShape_locoefa_PC_5,096h-[str LoCo EFA Pc 5]-BF
+207,096h_str_BF_AreaShape_locoefa_UMAP_1,096h-[str LoCo EFA Umap 1]-BF
+208,096h_str_BF_AreaShape_locoefa_UMAP_2,096h-[str LoCo EFA Umap 2]-BF
+209,096h_str_BF_AreaShape_locoefa_UMAP_3,096h-[str LoCo EFA Umap 3]-BF
+210,096h_str_BF_AreaShape_locoefa_coeff_0,096h-[str LoCo EFA Coeff 0]-BF
+211,096h_str_BF_AreaShape_locoefa_coeff_1,096h-[str LoCo EFA Coeff 1]-BF
+212,096h_str_BF_AreaShape_locoefa_coeff_10,096h-[str LoCo EFA Coeff 10]-BF
+213,096h_str_BF_AreaShape_locoefa_coeff_11,096h-[str LoCo EFA Coeff 11]-BF
+214,096h_str_BF_AreaShape_locoefa_coeff_12,096h-[str LoCo EFA Coeff 12]-BF
+215,096h_str_BF_AreaShape_locoefa_coeff_13,096h-[str LoCo EFA Coeff 13]-BF
+216,096h_str_BF_AreaShape_locoefa_coeff_14,096h-[str LoCo EFA Coeff 14]-BF
+217,096h_str_BF_AreaShape_locoefa_coeff_15,096h-[str LoCo EFA Coeff 15]-BF
+218,096h_str_BF_AreaShape_locoefa_coeff_16,096h-[str LoCo EFA Coeff 16]-BF
+219,096h_str_BF_AreaShape_locoefa_coeff_17,096h-[str LoCo EFA Coeff 17]-BF
+220,096h_str_BF_AreaShape_locoefa_coeff_18,096h-[str LoCo EFA Coeff 18]-BF
+221,096h_str_BF_AreaShape_locoefa_coeff_19,096h-[str LoCo EFA Coeff 19]-BF
+222,096h_str_BF_AreaShape_locoefa_coeff_2,096h-[str LoCo EFA Coeff 2]-BF
+223,096h_str_BF_AreaShape_locoefa_coeff_20,096h-[str LoCo EFA Coeff 20]-BF
+224,096h_str_BF_AreaShape_locoefa_coeff_21,096h-[str LoCo EFA Coeff 21]-BF
+225,096h_str_BF_AreaShape_locoefa_coeff_22,096h-[str LoCo EFA Coeff 22]-BF
+226,096h_str_BF_AreaShape_locoefa_coeff_23,096h-[str LoCo EFA Coeff 23]-BF
+227,096h_str_BF_AreaShape_locoefa_coeff_24,096h-[str LoCo EFA Coeff 24]-BF
+228,096h_str_BF_AreaShape_locoefa_coeff_25,096h-[str LoCo EFA Coeff 25]-BF
+229,096h_str_BF_AreaShape_locoefa_coeff_26,096h-[str LoCo EFA Coeff 26]-BF
+230,096h_str_BF_AreaShape_locoefa_coeff_27,096h-[str LoCo EFA Coeff 27]-BF
+231,096h_str_BF_AreaShape_locoefa_coeff_28,096h-[str LoCo EFA Coeff 28]-BF
+232,096h_str_BF_AreaShape_locoefa_coeff_29,096h-[str LoCo EFA Coeff 29]-BF
+233,096h_str_BF_AreaShape_locoefa_coeff_3,096h-[str LoCo EFA Coeff 3]-BF
+234,096h_str_BF_AreaShape_locoefa_coeff_30,096h-[str LoCo EFA Coeff 30]-BF
+235,096h_str_BF_AreaShape_locoefa_coeff_31,096h-[str LoCo EFA Coeff 31]-BF
+236,096h_str_BF_AreaShape_locoefa_coeff_32,096h-[str LoCo EFA Coeff 32]-BF
+237,096h_str_BF_AreaShape_locoefa_coeff_33,096h-[str LoCo EFA Coeff 33]-BF
+238,096h_str_BF_AreaShape_locoefa_coeff_34,096h-[str LoCo EFA Coeff 34]-BF
+239,096h_str_BF_AreaShape_locoefa_coeff_35,096h-[str LoCo EFA Coeff 35]-BF
+240,096h_str_BF_AreaShape_locoefa_coeff_36,096h-[str LoCo EFA Coeff 36]-BF
+241,096h_str_BF_AreaShape_locoefa_coeff_37,096h-[str LoCo EFA Coeff 37]-BF
+242,096h_str_BF_AreaShape_locoefa_coeff_38,096h-[str LoCo EFA Coeff 38]-BF
+243,096h_str_BF_AreaShape_locoefa_coeff_39,096h-[str LoCo EFA Coeff 39]-BF
+244,096h_str_BF_AreaShape_locoefa_coeff_4,096h-[str LoCo EFA Coeff 4]-BF
+245,096h_str_BF_AreaShape_locoefa_coeff_40,096h-[str LoCo EFA Coeff 40]-BF
+246,096h_str_BF_AreaShape_locoefa_coeff_41,096h-[str LoCo EFA Coeff 41]-BF
+247,096h_str_BF_AreaShape_locoefa_coeff_42,096h-[str LoCo EFA Coeff 42]-BF
+248,096h_str_BF_AreaShape_locoefa_coeff_43,096h-[str LoCo EFA Coeff 43]-BF
+249,096h_str_BF_AreaShape_locoefa_coeff_44,096h-[str LoCo EFA Coeff 44]-BF
+250,096h_str_BF_AreaShape_locoefa_coeff_45,096h-[str LoCo EFA Coeff 45]-BF
+251,096h_str_BF_AreaShape_locoefa_coeff_46,096h-[str LoCo EFA Coeff 46]-BF
+252,096h_str_BF_AreaShape_locoefa_coeff_47,096h-[str LoCo EFA Coeff 47]-BF
+253,096h_str_BF_AreaShape_locoefa_coeff_48,096h-[str LoCo EFA Coeff 48]-BF
+254,096h_str_BF_AreaShape_locoefa_coeff_49,096h-[str LoCo EFA Coeff 49]-BF
+255,096h_str_BF_AreaShape_locoefa_coeff_5,096h-[str LoCo EFA Coeff 5]-BF
+256,096h_str_BF_AreaShape_locoefa_coeff_50,096h-[str LoCo EFA Coeff 50]-BF
+257,096h_str_BF_AreaShape_locoefa_coeff_51,096h-[str LoCo EFA Coeff 51]-BF
+258,096h_str_BF_AreaShape_locoefa_coeff_6,096h-[str LoCo EFA Coeff 6]-BF
+259,096h_str_BF_AreaShape_locoefa_coeff_7,096h-[str LoCo EFA Coeff 7]-BF
+260,096h_str_BF_AreaShape_locoefa_coeff_8,096h-[str LoCo EFA Coeff 8]-BF
+261,096h_str_BF_AreaShape_locoefa_coeff_9,096h-[str LoCo EFA Coeff 9]-BF
+262,096h_str_BF_AreaShape_major_axis_length,096h-[str Major Axis Length]-BF
+263,096h_str_BF_AreaShape_minor_axis_length,096h-[str Minor Axis Length]-BF
+264,096h_str_BF_AreaShape_moments_hu_0,096h-[str Moments Hu 0]-BF
+265,096h_str_BF_AreaShape_moments_hu_1,096h-[str Moments Hu 1]-BF
+266,096h_str_BF_AreaShape_moments_hu_2,096h-[str Moments Hu 2]-BF
+267,096h_str_BF_AreaShape_moments_hu_3,096h-[str Moments Hu 3]-BF
+268,096h_str_BF_AreaShape_moments_hu_4,096h-[str Moments Hu 4]-BF
+269,096h_str_BF_AreaShape_moments_hu_5,096h-[str Moments Hu 5]-BF
+270,096h_str_BF_AreaShape_moments_hu_6,096h-[str Moments Hu 6]-BF
+271,096h_str_BF_AreaShape_orientation,096h-[str Orientation]-BF
+272,096h_str_BF_AreaShape_perimeter,096h-[str Perimeter]-BF
+0,072h_raw_CH_bra_mask_AreaShape_Area,072h-[Area]-TmCH
+1,072h_raw_CH_bra_mask_AreaShape_BoundingBoxArea,072h-[Bounding Box Area]-TmCH
+2,072h_raw_CH_bra_mask_AreaShape_BoundingBoxMaximum_X,072h-[Bounding Box Maximum X]-TmCH
+3,072h_raw_CH_bra_mask_AreaShape_BoundingBoxMaximum_Y,072h-[Bounding Box Maximum Y]-TmCH
+4,072h_raw_CH_bra_mask_AreaShape_BoundingBoxMinimum_X,072h-[Bounding Box Minimum X]-TmCH
+5,072h_raw_CH_bra_mask_AreaShape_BoundingBoxMinimum_Y,072h-[Bounding Box Minimum Y]-TmCH
+6,072h_raw_CH_bra_mask_AreaShape_Center_X,072h-[Center X]-TmCH
+7,072h_raw_CH_bra_mask_AreaShape_Center_Y,072h-[Center Y]-TmCH
+8,072h_raw_CH_bra_mask_AreaShape_Compactness,072h-[Compactness]-TmCH
+9,072h_raw_CH_bra_mask_AreaShape_ConvexArea,072h-[Convex Area]-TmCH
+10,072h_raw_CH_bra_mask_AreaShape_Eccentricity,072h-[Eccentricity]-TmCH
+11,072h_raw_CH_bra_mask_AreaShape_EquivalentDiameter,072h-[Equivalent Diameter]-TmCH
+12,072h_raw_CH_bra_mask_AreaShape_EulerNumber,072h-[Euler Number]-TmCH
+13,072h_raw_CH_bra_mask_AreaShape_Extent,072h-[Extent]-TmCH
+14,072h_raw_CH_bra_mask_AreaShape_FormFactor,072h-[Form Factor]-TmCH
+15,072h_raw_CH_bra_mask_AreaShape_MajorAxisLength,072h-[Major Axis Length]-TmCH
+16,072h_raw_CH_bra_mask_AreaShape_MaxFeretDiameter,072h-[Max Feret Diameter]-TmCH
+17,072h_raw_CH_bra_mask_AreaShape_MaximumRadius,072h-[Maximum Radius]-TmCH
+18,072h_raw_CH_bra_mask_AreaShape_MeanRadius,072h-[Mean Radius]-TmCH
+19,072h_raw_CH_bra_mask_AreaShape_MedianRadius,072h-[Median Radius]-TmCH
+20,072h_raw_CH_bra_mask_AreaShape_MinFeretDiameter,072h-[Min Feret Diameter]-TmCH
+21,072h_raw_CH_bra_mask_AreaShape_MinorAxisLength,072h-[Minor Axis Length]-TmCH
+22,072h_raw_CH_bra_mask_AreaShape_Orientation,072h-[Orientation]-TmCH
+23,072h_raw_CH_bra_mask_AreaShape_Perimeter,072h-[Perimeter]-TmCH
+24,072h_raw_CH_bra_mask_AreaShape_Solidity,072h-[Solidity]-TmCH
+25,072h_str_CH_AreaShape_Bra_MajorAxis_Polarisation,072h-[str Major Axis Polarisation]-TmCH
+26,072h_str_CH_AreaShape_Bra_MinorAxis_Polarisation,072h-[str Minor Axis Polarisation]-TmCH
+27,096h_raw_CH_AreaShape_Bra_AreaFraction,096h-[Area Fraction]-TmCH
+28,096h_raw_CH_bra_mask_AreaShape_Area,096h-[Area]-TmCH
+29,096h_raw_CH_bra_mask_AreaShape_BoundingBoxArea,096h-[Bounding Box Area]-TmCH
+30,096h_raw_CH_bra_mask_AreaShape_BoundingBoxMaximum_X,096h-[Bounding Box Maximum X]-TmCH
+31,096h_raw_CH_bra_mask_AreaShape_BoundingBoxMaximum_Y,096h-[Bounding Box Maximum Y]-TmCH
+32,096h_raw_CH_bra_mask_AreaShape_BoundingBoxMinimum_X,096h-[Bounding Box Minimum X]-TmCH
+33,096h_raw_CH_bra_mask_AreaShape_BoundingBoxMinimum_Y,096h-[Bounding Box Minimum Y]-TmCH
+34,096h_raw_CH_bra_mask_AreaShape_Center_X,096h-[Center X]-TmCH
+35,096h_raw_CH_bra_mask_AreaShape_Center_Y,096h-[Center Y]-TmCH
+36,096h_raw_CH_bra_mask_AreaShape_Compactness,096h-[Compactness]-TmCH
+37,096h_raw_CH_bra_mask_AreaShape_ConvexArea,096h-[Convex Area]-TmCH
+38,096h_raw_CH_bra_mask_AreaShape_Eccentricity,096h-[Eccentricity]-TmCH
+39,096h_raw_CH_bra_mask_AreaShape_EquivalentDiameter,096h-[Equivalent Diameter]-TmCH
+40,096h_raw_CH_bra_mask_AreaShape_EulerNumber,096h-[Euler Number]-TmCH
+41,096h_raw_CH_bra_mask_AreaShape_Extent,096h-[Extent]-TmCH
+42,096h_raw_CH_bra_mask_AreaShape_FormFactor,096h-[Form Factor]-TmCH
+43,096h_raw_CH_bra_mask_AreaShape_MajorAxisLength,096h-[Major Axis Length]-TmCH
+44,096h_raw_CH_bra_mask_AreaShape_MaxFeretDiameter,096h-[Max Feret Diameter]-TmCH
+45,096h_raw_CH_bra_mask_AreaShape_MaximumRadius,096h-[Maximum Radius]-TmCH
+46,096h_raw_CH_bra_mask_AreaShape_MeanRadius,096h-[Mean Radius]-TmCH
+47,096h_raw_CH_bra_mask_AreaShape_MedianRadius,096h-[Median Radius]-TmCH
+48,096h_raw_CH_bra_mask_AreaShape_MinFeretDiameter,096h-[Min Feret Diameter]-TmCH
+49,096h_raw_CH_bra_mask_AreaShape_MinorAxisLength,096h-[Minor Axis Length]-TmCH
+50,096h_raw_CH_bra_mask_AreaShape_Orientation,096h-[Orientation]-TmCH
+51,096h_raw_CH_bra_mask_AreaShape_Perimeter,096h-[Perimeter]-TmCH
+52,096h_raw_CH_bra_mask_AreaShape_Solidity,096h-[Solidity]-TmCH
+53,096h_str_CH_AreaShape_Bra_MajorAxis_Polarisation,096h-[str Major Axis Polarisation]-TmCH
+54,096h_str_CH_AreaShape_Bra_MinorAxis_Polarisation,096h-[str Minor Axis Polarisation]-TmCH
+0,072h_raw_CH__bf_mask_Intensity_IntegratedIntensity,072h-[Integrated Intensity]-TmCH(BF)
+1,072h_raw_CH__bf_mask_Intensity_IntegratedIntensityEdge,072h-[Integrated Intensity Edge]-TmCH(BF)
+2,072h_raw_CH__bf_mask_Intensity_LowerQuartileIntensity,072h-[Lower Quartile Intensity]-TmCH(BF)
+3,072h_raw_CH__bf_mask_Intensity_MADIntensity,072h-[M AD Intensity]-TmCH(BF)
+4,072h_raw_CH__bf_mask_Intensity_MassDisplacement,072h-[Mass Displacement]-TmCH(BF)
+5,072h_raw_CH__bf_mask_Intensity_MaxIntensity,072h-[Max Intensity]-TmCH(BF)
+6,072h_raw_CH__bf_mask_Intensity_MaxIntensityEdge,072h-[Max Intensity Edge]-TmCH(BF)
+7,072h_raw_CH__bf_mask_Intensity_MeanIntensity,072h-[Mean Intensity]-TmCH(BF)
+8,072h_raw_CH__bf_mask_Intensity_MeanIntensityEdge,072h-[Mean Intensity Edge]-TmCH(BF)
+9,072h_raw_CH__bf_mask_Intensity_MedianIntensity,072h-[Median Intensity]-TmCH(BF)
+10,072h_raw_CH__bf_mask_Intensity_MinIntensity,072h-[Min Intensity]-TmCH(BF)
+11,072h_raw_CH__bf_mask_Intensity_MinIntensityEdge,072h-[Min Intensity Edge]-TmCH(BF)
+12,072h_raw_CH__bf_mask_Intensity_StdIntensity,072h-[Std Intensity]-TmCH(BF)
+13,072h_raw_CH__bf_mask_Intensity_StdIntensityEdge,072h-[Std Intensity Edge]-TmCH(BF)
+14,072h_raw_CH__bf_mask_Intensity_UpperQuartileIntensity,072h-[Upper Quartile Intensity]-TmCH(BF)
+15,072h_raw_CH__bf_mask_RadialDistribution_FracAtD_1of9,072h-[Radial Distribution Sum 1of9]-TmCH(BF)
+16,072h_raw_CH__bf_mask_RadialDistribution_FracAtD_2of9,072h-[Radial Distribution Sum 2of9]-TmCH(BF)
+17,072h_raw_CH__bf_mask_RadialDistribution_FracAtD_3of9,072h-[Radial Distribution Sum 3of9]-TmCH(BF)
+18,072h_raw_CH__bf_mask_RadialDistribution_FracAtD_4of9,072h-[Radial Distribution Sum 4of9]-TmCH(BF)
+19,072h_raw_CH__bf_mask_RadialDistribution_FracAtD_5of9,072h-[Radial Distribution Sum 5of9]-TmCH(BF)
+20,072h_raw_CH__bf_mask_RadialDistribution_FracAtD_6of9,072h-[Radial Distribution Sum 6of9]-TmCH(BF)
+21,072h_raw_CH__bf_mask_RadialDistribution_FracAtD_7of9,072h-[Radial Distribution Sum 7of9]-TmCH(BF)
+22,072h_raw_CH__bf_mask_RadialDistribution_FracAtD_8of9,072h-[Radial Distribution Sum 8of9]-TmCH(BF)
+23,072h_raw_CH__bf_mask_RadialDistribution_FracAtD_9of9,072h-[Radial Distribution Sum 9of9]-TmCH(BF)
+24,072h_raw_CH__bf_mask_RadialDistribution_MeanFrac_1of9,072h-[Radial Distribution Mean 1of9]-TmCH(BF)
+25,072h_raw_CH__bf_mask_RadialDistribution_MeanFrac_2of9,072h-[Radial Distribution Mean 2of9]-TmCH(BF)
+26,072h_raw_CH__bf_mask_RadialDistribution_MeanFrac_3of9,072h-[Radial Distribution Mean 3of9]-TmCH(BF)
+27,072h_raw_CH__bf_mask_RadialDistribution_MeanFrac_4of9,072h-[Radial Distribution Mean 4of9]-TmCH(BF)
+28,072h_raw_CH__bf_mask_RadialDistribution_MeanFrac_5of9,072h-[Radial Distribution Mean 5of9]-TmCH(BF)
+29,072h_raw_CH__bf_mask_RadialDistribution_MeanFrac_6of9,072h-[Radial Distribution Mean 6of9]-TmCH(BF)
+30,072h_raw_CH__bf_mask_RadialDistribution_MeanFrac_7of9,072h-[Radial Distribution Mean 7of9]-TmCH(BF)
+31,072h_raw_CH__bf_mask_RadialDistribution_MeanFrac_8of9,072h-[Radial Distribution Mean 8of9]-TmCH(BF)
+32,072h_raw_CH__bf_mask_RadialDistribution_MeanFrac_9of9,072h-[Radial Distribution Mean 9of9]-TmCH(BF)
+33,072h_raw_CH__bf_mask_RadialDistribution_RadialCV_1of9,072h-[Radial Distribution Radial CV 1of9]-TmCH(BF)
+34,072h_raw_CH__bf_mask_RadialDistribution_RadialCV_2of9,072h-[Radial Distribution Radial CV 2of9]-TmCH(BF)
+35,072h_raw_CH__bf_mask_RadialDistribution_RadialCV_3of9,072h-[Radial Distribution Radial CV 3of9]-TmCH(BF)
+36,072h_raw_CH__bf_mask_RadialDistribution_RadialCV_4of9,072h-[Radial Distribution Radial CV 4of9]-TmCH(BF)
+37,072h_raw_CH__bf_mask_RadialDistribution_RadialCV_5of9,072h-[Radial Distribution Radial CV 5of9]-TmCH(BF)
+38,072h_raw_CH__bf_mask_RadialDistribution_RadialCV_6of9,072h-[Radial Distribution Radial CV 6of9]-TmCH(BF)
+39,072h_raw_CH__bf_mask_RadialDistribution_RadialCV_7of9,072h-[Radial Distribution Radial CV 7of9]-TmCH(BF)
+40,072h_raw_CH__bf_mask_RadialDistribution_RadialCV_8of9,072h-[Radial Distribution Radial CV 8of9]-TmCH(BF)
+41,072h_raw_CH__bf_mask_RadialDistribution_RadialCV_9of9,072h-[Radial Distribution Radial CV 9of9]-TmCH(BF)
+42,096h_raw_CH__bf_mask_Intensity_IntegratedIntensity,096h-[Integrated Intensity]-TmCH(BF)
+43,096h_raw_CH__bf_mask_Intensity_IntegratedIntensityEdge,096h-[Integrated Intensity Edge]-TmCH(BF)
+44,096h_raw_CH__bf_mask_Intensity_LowerQuartileIntensity,096h-[Lower Quartile Intensity]-TmCH(BF)
+45,096h_raw_CH__bf_mask_Intensity_MADIntensity,096h-[M AD Intensity]-TmCH(BF)
+46,096h_raw_CH__bf_mask_Intensity_MassDisplacement,096h-[Mass Displacement]-TmCH(BF)
+47,096h_raw_CH__bf_mask_Intensity_MaxIntensity,096h-[Max Intensity]-TmCH(BF)
+48,096h_raw_CH__bf_mask_Intensity_MaxIntensityEdge,096h-[Max Intensity Edge]-TmCH(BF)
+49,096h_raw_CH__bf_mask_Intensity_MeanIntensity,096h-[Mean Intensity]-TmCH(BF)
+50,096h_raw_CH__bf_mask_Intensity_MeanIntensityEdge,096h-[Mean Intensity Edge]-TmCH(BF)
+51,096h_raw_CH__bf_mask_Intensity_MedianIntensity,096h-[Median Intensity]-TmCH(BF)
+52,096h_raw_CH__bf_mask_Intensity_MinIntensity,096h-[Min Intensity]-TmCH(BF)
+53,096h_raw_CH__bf_mask_Intensity_MinIntensityEdge,096h-[Min Intensity Edge]-TmCH(BF)
+54,096h_raw_CH__bf_mask_Intensity_StdIntensity,096h-[Std Intensity]-TmCH(BF)
+55,096h_raw_CH__bf_mask_Intensity_StdIntensityEdge,096h-[Std Intensity Edge]-TmCH(BF)
+56,096h_raw_CH__bf_mask_Intensity_UpperQuartileIntensity,096h-[Upper Quartile Intensity]-TmCH(BF)
+57,096h_raw_CH__bf_mask_RadialDistribution_FracAtD_1of9,096h-[Radial Distribution Sum 1of9]-TmCH(BF)
+58,096h_raw_CH__bf_mask_RadialDistribution_FracAtD_2of9,096h-[Radial Distribution Sum 2of9]-TmCH(BF)
+59,096h_raw_CH__bf_mask_RadialDistribution_FracAtD_3of9,096h-[Radial Distribution Sum 3of9]-TmCH(BF)
+60,096h_raw_CH__bf_mask_RadialDistribution_FracAtD_4of9,096h-[Radial Distribution Sum 4of9]-TmCH(BF)
+61,096h_raw_CH__bf_mask_RadialDistribution_FracAtD_5of9,096h-[Radial Distribution Sum 5of9]-TmCH(BF)
+62,096h_raw_CH__bf_mask_RadialDistribution_FracAtD_6of9,096h-[Radial Distribution Sum 6of9]-TmCH(BF)
+63,096h_raw_CH__bf_mask_RadialDistribution_FracAtD_7of9,096h-[Radial Distribution Sum 7of9]-TmCH(BF)
+64,096h_raw_CH__bf_mask_RadialDistribution_FracAtD_8of9,096h-[Radial Distribution Sum 8of9]-TmCH(BF)
+65,096h_raw_CH__bf_mask_RadialDistribution_FracAtD_9of9,096h-[Radial Distribution Sum 9of9]-TmCH(BF)
+66,096h_raw_CH__bf_mask_RadialDistribution_MeanFrac_1of9,096h-[Radial Distribution Mean 1of9]-TmCH(BF)
+67,096h_raw_CH__bf_mask_RadialDistribution_MeanFrac_2of9,096h-[Radial Distribution Mean 2of9]-TmCH(BF)
+68,096h_raw_CH__bf_mask_RadialDistribution_MeanFrac_3of9,096h-[Radial Distribution Mean 3of9]-TmCH(BF)
+69,096h_raw_CH__bf_mask_RadialDistribution_MeanFrac_4of9,096h-[Radial Distribution Mean 4of9]-TmCH(BF)
+70,096h_raw_CH__bf_mask_RadialDistribution_MeanFrac_5of9,096h-[Radial Distribution Mean 5of9]-TmCH(BF)
+71,096h_raw_CH__bf_mask_RadialDistribution_MeanFrac_6of9,096h-[Radial Distribution Mean 6of9]-TmCH(BF)
+72,096h_raw_CH__bf_mask_RadialDistribution_MeanFrac_7of9,096h-[Radial Distribution Mean 7of9]-TmCH(BF)
+73,096h_raw_CH__bf_mask_RadialDistribution_MeanFrac_8of9,096h-[Radial Distribution Mean 8of9]-TmCH(BF)
+74,096h_raw_CH__bf_mask_RadialDistribution_MeanFrac_9of9,096h-[Radial Distribution Mean 9of9]-TmCH(BF)
+75,096h_raw_CH__bf_mask_RadialDistribution_RadialCV_1of9,096h-[Radial Distribution Radial CV 1of9]-TmCH(BF)
+76,096h_raw_CH__bf_mask_RadialDistribution_RadialCV_2of9,096h-[Radial Distribution Radial CV 2of9]-TmCH(BF)
+77,096h_raw_CH__bf_mask_RadialDistribution_RadialCV_3of9,096h-[Radial Distribution Radial CV 3of9]-TmCH(BF)
+78,096h_raw_CH__bf_mask_RadialDistribution_RadialCV_4of9,096h-[Radial Distribution Radial CV 4of9]-TmCH(BF)
+79,096h_raw_CH__bf_mask_RadialDistribution_RadialCV_5of9,096h-[Radial Distribution Radial CV 5of9]-TmCH(BF)
+80,096h_raw_CH__bf_mask_RadialDistribution_RadialCV_6of9,096h-[Radial Distribution Radial CV 6of9]-TmCH(BF)
+81,096h_raw_CH__bf_mask_RadialDistribution_RadialCV_7of9,096h-[Radial Distribution Radial CV 7of9]-TmCH(BF)
+82,096h_raw_CH__bf_mask_RadialDistribution_RadialCV_8of9,096h-[Radial Distribution Radial CV 8of9]-TmCH(BF)
+83,096h_raw_CH__bf_mask_RadialDistribution_RadialCV_9of9,096h-[Radial Distribution Radial CV 9of9]-TmCH(BF)
+0,072h_raw_CH_bra_mask_Intensity_IntegratedIntensity,072h-[Integrated Intensity]-TmCH(mCH)
+1,072h_raw_CH_bra_mask_Intensity_IntegratedIntensityEdge,072h-[Integrated Intensity Edge]-TmCH(mCH)
+2,072h_raw_CH_bra_mask_Intensity_LowerQuartileIntensity,072h-[Lower Quartile Intensity]-TmCH(mCH)
+3,072h_raw_CH_bra_mask_Intensity_MADIntensity,072h-[M AD Intensity]-TmCH(mCH)
+4,072h_raw_CH_bra_mask_Intensity_MassDisplacement,072h-[Mass Displacement]-TmCH(mCH)
+5,072h_raw_CH_bra_mask_Intensity_MaxIntensity,072h-[Max Intensity]-TmCH(mCH)
+6,072h_raw_CH_bra_mask_Intensity_MaxIntensityEdge,072h-[Max Intensity Edge]-TmCH(mCH)
+7,072h_raw_CH_bra_mask_Intensity_MeanIntensity,072h-[Mean Intensity]-TmCH(mCH)
+8,072h_raw_CH_bra_mask_Intensity_MeanIntensityEdge,072h-[Mean Intensity Edge]-TmCH(mCH)
+9,072h_raw_CH_bra_mask_Intensity_MedianIntensity,072h-[Median Intensity]-TmCH(mCH)
+10,072h_raw_CH_bra_mask_Intensity_MinIntensity,072h-[Min Intensity]-TmCH(mCH)
+11,072h_raw_CH_bra_mask_Intensity_MinIntensityEdge,072h-[Min Intensity Edge]-TmCH(mCH)
+12,072h_raw_CH_bra_mask_Intensity_StdIntensity,072h-[Std Intensity]-TmCH(mCH)
+13,072h_raw_CH_bra_mask_Intensity_StdIntensityEdge,072h-[Std Intensity Edge]-TmCH(mCH)
+14,072h_raw_CH_bra_mask_Intensity_UpperQuartileIntensity,072h-[Upper Quartile Intensity]-TmCH(mCH)
+15,072h_raw_CH_bra_mask_RadialDistribution_FracAtD_1of9,072h-[Radial Distribution Sum 1of9]-TmCH(mCH)
+16,072h_raw_CH_bra_mask_RadialDistribution_FracAtD_2of9,072h-[Radial Distribution Sum 2of9]-TmCH(mCH)
+17,072h_raw_CH_bra_mask_RadialDistribution_FracAtD_3of9,072h-[Radial Distribution Sum 3of9]-TmCH(mCH)
+18,072h_raw_CH_bra_mask_RadialDistribution_FracAtD_4of9,072h-[Radial Distribution Sum 4of9]-TmCH(mCH)
+19,072h_raw_CH_bra_mask_RadialDistribution_FracAtD_5of9,072h-[Radial Distribution Sum 5of9]-TmCH(mCH)
+20,072h_raw_CH_bra_mask_RadialDistribution_FracAtD_6of9,072h-[Radial Distribution Sum 6of9]-TmCH(mCH)
+21,072h_raw_CH_bra_mask_RadialDistribution_FracAtD_7of9,072h-[Radial Distribution Sum 7of9]-TmCH(mCH)
+22,072h_raw_CH_bra_mask_RadialDistribution_FracAtD_8of9,072h-[Radial Distribution Sum 8of9]-TmCH(mCH)
+23,072h_raw_CH_bra_mask_RadialDistribution_FracAtD_9of9,072h-[Radial Distribution Sum 9of9]-TmCH(mCH)
+24,072h_raw_CH_bra_mask_RadialDistribution_MeanFrac_1of9,072h-[Radial Distribution Mean 1of9]-TmCH(mCH)
+25,072h_raw_CH_bra_mask_RadialDistribution_MeanFrac_2of9,072h-[Radial Distribution Mean 2of9]-TmCH(mCH)
+26,072h_raw_CH_bra_mask_RadialDistribution_MeanFrac_3of9,072h-[Radial Distribution Mean 3of9]-TmCH(mCH)
+27,072h_raw_CH_bra_mask_RadialDistribution_MeanFrac_4of9,072h-[Radial Distribution Mean 4of9]-TmCH(mCH)
+28,072h_raw_CH_bra_mask_RadialDistribution_MeanFrac_5of9,072h-[Radial Distribution Mean 5of9]-TmCH(mCH)
+29,072h_raw_CH_bra_mask_RadialDistribution_MeanFrac_6of9,072h-[Radial Distribution Mean 6of9]-TmCH(mCH)
+30,072h_raw_CH_bra_mask_RadialDistribution_MeanFrac_7of9,072h-[Radial Distribution Mean 7of9]-TmCH(mCH)
+31,072h_raw_CH_bra_mask_RadialDistribution_MeanFrac_8of9,072h-[Radial Distribution Mean 8of9]-TmCH(mCH)
+32,072h_raw_CH_bra_mask_RadialDistribution_MeanFrac_9of9,072h-[Radial Distribution Mean 9of9]-TmCH(mCH)
+33,072h_raw_CH_bra_mask_RadialDistribution_RadialCV_1of9,072h-[Radial Distribution Radial CV 1of9]-TmCH(mCH)
+34,072h_raw_CH_bra_mask_RadialDistribution_RadialCV_2of9,072h-[Radial Distribution Radial CV 2of9]-TmCH(mCH)
+35,072h_raw_CH_bra_mask_RadialDistribution_RadialCV_3of9,072h-[Radial Distribution Radial CV 3of9]-TmCH(mCH)
+36,072h_raw_CH_bra_mask_RadialDistribution_RadialCV_4of9,072h-[Radial Distribution Radial CV 4of9]-TmCH(mCH)
+37,072h_raw_CH_bra_mask_RadialDistribution_RadialCV_5of9,072h-[Radial Distribution Radial CV 5of9]-TmCH(mCH)
+38,072h_raw_CH_bra_mask_RadialDistribution_RadialCV_6of9,072h-[Radial Distribution Radial CV 6of9]-TmCH(mCH)
+39,072h_raw_CH_bra_mask_RadialDistribution_RadialCV_7of9,072h-[Radial Distribution Radial CV 7of9]-TmCH(mCH)
+40,072h_raw_CH_bra_mask_RadialDistribution_RadialCV_8of9,072h-[Radial Distribution Radial CV 8of9]-TmCH(mCH)
+41,072h_raw_CH_bra_mask_RadialDistribution_RadialCV_9of9,072h-[Radial Distribution Radial CV 9of9]-TmCH(mCH)
+42,096h_raw_CH_bra_mask_Intensity_IntegratedIntensity,096h-[Integrated Intensity]-TmCH(mCH)
+43,096h_raw_CH_bra_mask_Intensity_IntegratedIntensityEdge,096h-[Integrated Intensity Edge]-TmCH(mCH)
+44,096h_raw_CH_bra_mask_Intensity_LowerQuartileIntensity,096h-[Lower Quartile Intensity]-TmCH(mCH)
+45,096h_raw_CH_bra_mask_Intensity_MADIntensity,096h-[M AD Intensity]-TmCH(mCH)
+46,096h_raw_CH_bra_mask_Intensity_MassDisplacement,096h-[Mass Displacement]-TmCH(mCH)
+47,096h_raw_CH_bra_mask_Intensity_MaxIntensity,096h-[Max Intensity]-TmCH(mCH)
+48,096h_raw_CH_bra_mask_Intensity_MaxIntensityEdge,096h-[Max Intensity Edge]-TmCH(mCH)
+49,096h_raw_CH_bra_mask_Intensity_MeanIntensity,096h-[Mean Intensity]-TmCH(mCH)
+50,096h_raw_CH_bra_mask_Intensity_MeanIntensityEdge,096h-[Mean Intensity Edge]-TmCH(mCH)
+51,096h_raw_CH_bra_mask_Intensity_MedianIntensity,096h-[Median Intensity]-TmCH(mCH)
+52,096h_raw_CH_bra_mask_Intensity_MinIntensity,096h-[Min Intensity]-TmCH(mCH)
+53,096h_raw_CH_bra_mask_Intensity_MinIntensityEdge,096h-[Min Intensity Edge]-TmCH(mCH)
+54,096h_raw_CH_bra_mask_Intensity_StdIntensity,096h-[Std Intensity]-TmCH(mCH)
+55,096h_raw_CH_bra_mask_Intensity_StdIntensityEdge,096h-[Std Intensity Edge]-TmCH(mCH)
+56,096h_raw_CH_bra_mask_Intensity_UpperQuartileIntensity,096h-[Upper Quartile Intensity]-TmCH(mCH)
+57,096h_raw_CH_bra_mask_RadialDistribution_FracAtD_1of9,096h-[Radial Distribution Sum 1of9]-TmCH(mCH)
+58,096h_raw_CH_bra_mask_RadialDistribution_FracAtD_2of9,096h-[Radial Distribution Sum 2of9]-TmCH(mCH)
+59,096h_raw_CH_bra_mask_RadialDistribution_FracAtD_3of9,096h-[Radial Distribution Sum 3of9]-TmCH(mCH)
+60,096h_raw_CH_bra_mask_RadialDistribution_FracAtD_4of9,096h-[Radial Distribution Sum 4of9]-TmCH(mCH)
+61,096h_raw_CH_bra_mask_RadialDistribution_FracAtD_5of9,096h-[Radial Distribution Sum 5of9]-TmCH(mCH)
+62,096h_raw_CH_bra_mask_RadialDistribution_FracAtD_6of9,096h-[Radial Distribution Sum 6of9]-TmCH(mCH)
+63,096h_raw_CH_bra_mask_RadialDistribution_FracAtD_7of9,096h-[Radial Distribution Sum 7of9]-TmCH(mCH)
+64,096h_raw_CH_bra_mask_RadialDistribution_FracAtD_8of9,096h-[Radial Distribution Sum 8of9]-TmCH(mCH)
+65,096h_raw_CH_bra_mask_RadialDistribution_FracAtD_9of9,096h-[Radial Distribution Sum 9of9]-TmCH(mCH)
+66,096h_raw_CH_bra_mask_RadialDistribution_MeanFrac_1of9,096h-[Radial Distribution Mean 1of9]-TmCH(mCH)
+67,096h_raw_CH_bra_mask_RadialDistribution_MeanFrac_2of9,096h-[Radial Distribution Mean 2of9]-TmCH(mCH)
+68,096h_raw_CH_bra_mask_RadialDistribution_MeanFrac_3of9,096h-[Radial Distribution Mean 3of9]-TmCH(mCH)
+69,096h_raw_CH_bra_mask_RadialDistribution_MeanFrac_4of9,096h-[Radial Distribution Mean 4of9]-TmCH(mCH)
+70,096h_raw_CH_bra_mask_RadialDistribution_MeanFrac_5of9,096h-[Radial Distribution Mean 5of9]-TmCH(mCH)
+71,096h_raw_CH_bra_mask_RadialDistribution_MeanFrac_6of9,096h-[Radial Distribution Mean 6of9]-TmCH(mCH)
+72,096h_raw_CH_bra_mask_RadialDistribution_MeanFrac_7of9,096h-[Radial Distribution Mean 7of9]-TmCH(mCH)
+73,096h_raw_CH_bra_mask_RadialDistribution_MeanFrac_8of9,096h-[Radial Distribution Mean 8of9]-TmCH(mCH)
+74,096h_raw_CH_bra_mask_RadialDistribution_MeanFrac_9of9,096h-[Radial Distribution Mean 9of9]-TmCH(mCH)
+75,096h_raw_CH_bra_mask_RadialDistribution_RadialCV_1of9,096h-[Radial Distribution Radial CV 1of9]-TmCH(mCH)
+76,096h_raw_CH_bra_mask_RadialDistribution_RadialCV_2of9,096h-[Radial Distribution Radial CV 2of9]-TmCH(mCH)
+77,096h_raw_CH_bra_mask_RadialDistribution_RadialCV_3of9,096h-[Radial Distribution Radial CV 3of9]-TmCH(mCH)
+78,096h_raw_CH_bra_mask_RadialDistribution_RadialCV_4of9,096h-[Radial Distribution Radial CV 4of9]-TmCH(mCH)
+79,096h_raw_CH_bra_mask_RadialDistribution_RadialCV_5of9,096h-[Radial Distribution Radial CV 5of9]-TmCH(mCH)
+80,096h_raw_CH_bra_mask_RadialDistribution_RadialCV_6of9,096h-[Radial Distribution Radial CV 6of9]-TmCH(mCH)
+81,096h_raw_CH_bra_mask_RadialDistribution_RadialCV_7of9,096h-[Radial Distribution Radial CV 7of9]-TmCH(mCH)
+82,096h_raw_CH_bra_mask_RadialDistribution_RadialCV_8of9,096h-[Radial Distribution Radial CV 8of9]-TmCH(mCH)
+83,096h_raw_CH_bra_mask_RadialDistribution_RadialCV_9of9,096h-[Radial Distribution Radial CV 9of9]-TmCH(mCH)

@@ -1,0 +1,84 @@
+,original_names,plot_names
+0,raw_BF_AreaShape_area,[Area]-BF
+1,raw_BF_AreaShape_aspect_ratio,[Aspect Ratio]-BF
+2,raw_BF_AreaShape_axis_major_length,[Axis Major Length]-BF
+3,raw_BF_AreaShape_axis_minor_length,[Axis Minor Length]-BF
+4,raw_BF_AreaShape_eccentricity,[Eccentricity]-BF
+5,raw_BF_AreaShape_feret_diameter_max,[Feret Diameter Max]-BF
+6,raw_BF_AreaShape_perimeter,[Perimeter]-BF
+7,raw_BF_AreaShape_solidity,[Solidity]-BF
+8,str_BF_AreaShape_area,[str Area]-BF
+9,str_BF_AreaShape_aspect_ratio,[str Aspect Ratio]-BF
+10,str_BF_AreaShape_eccentricity,[str Eccentricity]-BF
+11,str_BF_AreaShape_equivalent_diameter,[str Equivalent Diameter]-BF
+12,str_BF_AreaShape_extent,[str Extent]-BF
+13,str_BF_AreaShape_form_factor,[str Form Factor]-BF
+14,str_BF_AreaShape_inertia_tensor_0_0,[str Inertia Tensor 0 0]-BF
+15,str_BF_AreaShape_inertia_tensor_0_1,[str Inertia Tensor 0 1]-BF
+16,str_BF_AreaShape_inertia_tensor_1_0,[str Inertia Tensor 1 0]-BF
+17,str_BF_AreaShape_inertia_tensor_1_1,[str Inertia Tensor 1 1]-BF
+18,str_BF_AreaShape_inertia_tensor_eigvals_0,[str Inertia Tensor Eigvals 0]-BF
+19,str_BF_AreaShape_inertia_tensor_eigvals_1,[str Inertia Tensor Eigvals 1]-BF
+20,str_BF_AreaShape_locoefa_coeff_0,[str LoCo EFA Coeff 0]-BF
+21,str_BF_AreaShape_locoefa_coeff_1,[str LoCo EFA Coeff 1]-BF
+22,str_BF_AreaShape_locoefa_coeff_10,[str LoCo EFA Coeff 10]-BF
+23,str_BF_AreaShape_locoefa_coeff_11,[str LoCo EFA Coeff 11]-BF
+24,str_BF_AreaShape_locoefa_coeff_12,[str LoCo EFA Coeff 12]-BF
+25,str_BF_AreaShape_locoefa_coeff_13,[str LoCo EFA Coeff 13]-BF
+26,str_BF_AreaShape_locoefa_coeff_14,[str LoCo EFA Coeff 14]-BF
+27,str_BF_AreaShape_locoefa_coeff_15,[str LoCo EFA Coeff 15]-BF
+28,str_BF_AreaShape_locoefa_coeff_16,[str LoCo EFA Coeff 16]-BF
+29,str_BF_AreaShape_locoefa_coeff_17,[str LoCo EFA Coeff 17]-BF
+30,str_BF_AreaShape_locoefa_coeff_18,[str LoCo EFA Coeff 18]-BF
+31,str_BF_AreaShape_locoefa_coeff_19,[str LoCo EFA Coeff 19]-BF
+32,str_BF_AreaShape_locoefa_coeff_2,[str LoCo EFA Coeff 2]-BF
+33,str_BF_AreaShape_locoefa_coeff_20,[str LoCo EFA Coeff 20]-BF
+34,str_BF_AreaShape_locoefa_coeff_21,[str LoCo EFA Coeff 21]-BF
+35,str_BF_AreaShape_locoefa_coeff_22,[str LoCo EFA Coeff 22]-BF
+36,str_BF_AreaShape_locoefa_coeff_23,[str LoCo EFA Coeff 23]-BF
+37,str_BF_AreaShape_locoefa_coeff_24,[str LoCo EFA Coeff 24]-BF
+38,str_BF_AreaShape_locoefa_coeff_25,[str LoCo EFA Coeff 25]-BF
+39,str_BF_AreaShape_locoefa_coeff_26,[str LoCo EFA Coeff 26]-BF
+40,str_BF_AreaShape_locoefa_coeff_27,[str LoCo EFA Coeff 27]-BF
+41,str_BF_AreaShape_locoefa_coeff_28,[str LoCo EFA Coeff 28]-BF
+42,str_BF_AreaShape_locoefa_coeff_29,[str LoCo EFA Coeff 29]-BF
+43,str_BF_AreaShape_locoefa_coeff_3,[str LoCo EFA Coeff 3]-BF
+44,str_BF_AreaShape_locoefa_coeff_30,[str LoCo EFA Coeff 30]-BF
+45,str_BF_AreaShape_locoefa_coeff_31,[str LoCo EFA Coeff 31]-BF
+46,str_BF_AreaShape_locoefa_coeff_32,[str LoCo EFA Coeff 32]-BF
+47,str_BF_AreaShape_locoefa_coeff_33,[str LoCo EFA Coeff 33]-BF
+48,str_BF_AreaShape_locoefa_coeff_34,[str LoCo EFA Coeff 34]-BF
+49,str_BF_AreaShape_locoefa_coeff_35,[str LoCo EFA Coeff 35]-BF
+50,str_BF_AreaShape_locoefa_coeff_36,[str LoCo EFA Coeff 36]-BF
+51,str_BF_AreaShape_locoefa_coeff_37,[str LoCo EFA Coeff 37]-BF
+52,str_BF_AreaShape_locoefa_coeff_38,[str LoCo EFA Coeff 38]-BF
+53,str_BF_AreaShape_locoefa_coeff_39,[str LoCo EFA Coeff 39]-BF
+54,str_BF_AreaShape_locoefa_coeff_4,[str LoCo EFA Coeff 4]-BF
+55,str_BF_AreaShape_locoefa_coeff_40,[str LoCo EFA Coeff 40]-BF
+56,str_BF_AreaShape_locoefa_coeff_41,[str LoCo EFA Coeff 41]-BF
+57,str_BF_AreaShape_locoefa_coeff_42,[str LoCo EFA Coeff 42]-BF
+58,str_BF_AreaShape_locoefa_coeff_43,[str LoCo EFA Coeff 43]-BF
+59,str_BF_AreaShape_locoefa_coeff_44,[str LoCo EFA Coeff 44]-BF
+60,str_BF_AreaShape_locoefa_coeff_45,[str LoCo EFA Coeff 45]-BF
+61,str_BF_AreaShape_locoefa_coeff_46,[str LoCo EFA Coeff 46]-BF
+62,str_BF_AreaShape_locoefa_coeff_47,[str LoCo EFA Coeff 47]-BF
+63,str_BF_AreaShape_locoefa_coeff_48,[str LoCo EFA Coeff 48]-BF
+64,str_BF_AreaShape_locoefa_coeff_49,[str LoCo EFA Coeff 49]-BF
+65,str_BF_AreaShape_locoefa_coeff_5,[str LoCo EFA Coeff 5]-BF
+66,str_BF_AreaShape_locoefa_coeff_50,[str LoCo EFA Coeff 50]-BF
+67,str_BF_AreaShape_locoefa_coeff_51,[str LoCo EFA Coeff 51]-BF
+68,str_BF_AreaShape_locoefa_coeff_6,[str LoCo EFA Coeff 6]-BF
+69,str_BF_AreaShape_locoefa_coeff_7,[str LoCo EFA Coeff 7]-BF
+70,str_BF_AreaShape_locoefa_coeff_8,[str LoCo EFA Coeff 8]-BF
+71,str_BF_AreaShape_locoefa_coeff_9,[str LoCo EFA Coeff 9]-BF
+72,str_BF_AreaShape_major_axis_length,[str Major Axis Length]-BF
+73,str_BF_AreaShape_minor_axis_length,[str Minor Axis Length]-BF
+74,str_BF_AreaShape_moments_hu_0,[str Moments Hu 0]-BF
+75,str_BF_AreaShape_moments_hu_1,[str Moments Hu 1]-BF
+76,str_BF_AreaShape_moments_hu_2,[str Moments Hu 2]-BF
+77,str_BF_AreaShape_moments_hu_3,[str Moments Hu 3]-BF
+78,str_BF_AreaShape_moments_hu_4,[str Moments Hu 4]-BF
+79,str_BF_AreaShape_moments_hu_5,[str Moments Hu 5]-BF
+80,str_BF_AreaShape_moments_hu_6,[str Moments Hu 6]-BF
+81,str_BF_AreaShape_orientation,[str Orientation]-BF
+82,str_BF_AreaShape_perimeter,[str Perimeter]-BF
