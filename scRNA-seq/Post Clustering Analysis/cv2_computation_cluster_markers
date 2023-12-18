@@ -1,0 +1,353 @@
+df <- readRDS("df_int.rds")
+
+a <- colnames(df48)
+b <- colnames(df72)
+c <- colnames(df96)
+d <- colnames(df120)
+a <- paste(a, "1", sep="_")
+b <- paste(b, "2", sep="_")
+c <- paste(c, "3", sep="_")
+d <- paste(d, "4", sep="_")
+cells.use <- c(a,b,c,d)
+
+df <- subset(df, cells=cells.use)
+
+Idents(df) <- "time"
+
+df48.int <- subset(df, idents="48h")
+
+df72.int <- subset(df, idents="72h")
+
+df96.int <- subset(df, idents="96h")
+
+df120.int <- subset(df, idents="120h")
+
+rm(df)
+
+barcode_counts <- table(df48.int@meta.data$Sample.barcode)
+selected_barcodes <- names(barcode_counts[barcode_counts > 20])
+
+# First, convert selected_barcodes to a character vector
+selected_barcodes <- as.character(selected_barcodes)
+
+# Next, subset the metadata of df72c to only include samples with Sample.barcode in selected_barcodes
+selected_samples <- df48.int@meta.data$Sample.barcode %in% selected_barcodes
+df48_sub <- df48.int[,selected_samples]
+
+barcode_counts <- table(df96.int@meta.data$Sample.barcode)
+selected_barcodes <- names(barcode_counts[barcode_counts > 20])
+
+# First, convert selected_barcodes to a character vector
+selected_barcodes <- as.character(selected_barcodes)
+
+# Next, subset the metadata of df72c to only include samples with Sample.barcode in selected_barcodes
+selected_samples <- df96.int@meta.data$Sample.barcode %in% selected_barcodes
+df96_sub <- df96.int[,selected_samples]
+
+barcode_counts <- table(df72.int@meta.data$Sample.barcode)
+selected_barcodes <- names(barcode_counts[barcode_counts > 20])
+
+# First, convert selected_barcodes to a character vector
+selected_barcodes <- as.character(selected_barcodes)
+
+# Next, subset the metadata of df72c to only include samples with Sample.barcode in selected_barcodes
+selected_samples <- df72.int@meta.data$Sample.barcode %in% selected_barcodes
+df72_sub <- df72.int[,selected_samples]
+
+barcode_counts <- table(df120.int@meta.data$Sample.barcode)
+selected_barcodes <- names(barcode_counts[barcode_counts > 20])
+
+# First, convert selected_barcodes to a character vector
+selected_barcodes <- as.character(selected_barcodes)
+
+# Next, subset the metadata of df72c to only include samples with Sample.barcode in selected_barcodes
+selected_samples <- df120.int@meta.data$Sample.barcode %in% selected_barcodes
+df120_sub <- df120.int[,selected_samples]
+
+min_cells_expr <- 42
+
+# Subset genes expressed in at least min_cells_expr cells
+df96_sub <- subset(df96_sub, features = rownames(df96_sub)[rowSums(df96_sub@assays$RNA@counts > 1) >= min_cells_expr])
+
+a <- AverageExpression(df96_sub, group.by ="Sample.barcode")$RNA
+
+# Remove genes that are not expressed in any of the samples
+a_filt <- a[rowSums(a > 0) == ncol(a), ]
+
+# Remove genes with low expression in all samples
+a_filt2 <- a_filt[rowMeans(a_filt > 0.1) > 0, ]
+
+# Calculate the squared coefficient of variation
+#scv <- apply(a_filt, 1, function(x) var(x)/mean(x)^2)
+scv <- apply(a_filt, 1, function(x) (sd(x)/mean(x))^2)
+
+scv.96 <- as.data.frame(scv)
+
+min_cells_expr <- 78
+
+# Subset genes expressed in at least min_cells_expr cells
+df48_sub <- subset(df48_sub, features = rownames(df48_sub)[rowSums(df48_sub@assays$RNA@counts > 1) >= min_cells_expr])
+
+a <- AverageExpression(df48_sub, group.by ="Sample.barcode")$RNA
+
+# Remove genes that are not expressed in any of the samples
+a_filt <- a[rowSums(a > 0) == ncol(a), ]
+
+# Remove genes with low expression in all samples
+a_filt2 <- a_filt[rowMeans(a_filt > 0.1) > 0, ]
+
+# Calculate the squared coefficient of variation
+#scv <- apply(a_filt, 1, function(x) var(x)/mean(x)^2)
+scv <- apply(a_filt, 1, function(x) (sd(x)/mean(x))^2)
+
+scv.48 <- as.data.frame(scv)
+
+min_cells_expr <- 34
+
+# Subset genes expressed in at least min_cells_expr cells
+df72_sub <- subset(df72_sub, features = rownames(df72_sub)[rowSums(df72_sub@assays$RNA@counts > 1) >= min_cells_expr])
+
+a <- AverageExpression(df72_sub, group.by ="Sample.barcode")$RNA
+
+# Remove genes that are not expressed in any of the samples
+a_filt <- a[rowSums(a > 0) == ncol(a), ]
+
+# Remove genes with low expression in all samples
+a_filt2 <- a_filt[rowMeans(a_filt > 0.1) > 0, ]
+
+# Calculate the squared coefficient of variation
+#scv <- apply(a_filt, 1, function(x) var(x)/mean(x)^2)
+scv <- apply(a_filt, 1, function(x) (sd(x)/mean(x))^2)
+
+scv.72 <- as.data.frame(scv)
+
+min_cells_expr <- 266
+
+# Subset genes expressed in at least min_cells_expr cells
+df120_sub <- subset(df120_sub, features = rownames(df120_sub)[rowSums(df120_sub@assays$RNA@counts > 1) >= min_cells_expr])
+
+a <- AverageExpression(df120_sub, group.by ="Sample.barcode")$RNA
+
+# Remove genes that are not expressed in any of the samples
+a_filt <- a[rowSums(a > 0) == ncol(a), ]
+
+# Remove genes with low expression in all samples
+a_filt2 <- a_filt[rowMeans(a_filt > 0.1) > 0, ]
+
+# Calculate the squared coefficient of variation
+#scv <- apply(a_filt, 1, function(x) var(x)/mean(x)^2)
+scv <- apply(a_filt, 1, function(x) (sd(x)/mean(x))^2)
+
+scv.120 <- as.data.frame(scv)
+
+# Assuming 'scv96' and 'scv72' are your dataframes
+
+# Add the row names as a column
+scv.96$RowNames <- rownames(scv.96)
+scv.72$RowNames <- rownames(scv.72)
+scv.48$RowNames <- rownames(scv.48)
+scv.120$RowNames <- rownames(scv.120)
+
+
+# Assuming scv.48, scv.72, scv.96, and scv.120 are your individual data frames
+
+# Merge the data frames by row names
+merged_df <- merge(merge(scv.48, scv.72, by = "row.names", all = TRUE),
+                   merge(scv.96, scv.120, by = "row.names", all = TRUE),
+                   by = "Row.names", all = TRUE)
+head(merged_df)
+
+# Assuming merged_df is your merged dataframe
+
+# Remove rows with NA values
+# merged_df2 <- merged_df[complete.cases(merged_df), ]
+
+merged_df2 <- merged_df
+
+# Assuming merged_df2 is your merged dataframe after removing rows with NA values
+
+# Rename the columns in the specified order
+colnames(merged_df2) <- c("RowNames", "scv48", "RowNames", "scv72", "RowNames", "scv96", "RowNames", "scv120", "RowNames")
+
+head(merged_df2)
+
+rownames(merged_df2) <- merged_df2$RowNames
+
+head(merged_df2)
+
+library(dplyr)
+
+# Assuming merged_df2 is your merged dataframe with renamed columns
+
+# Remove columns named "RowNames"
+merged_df3 <- merged_df2 %>%
+    select(-contains("RowNames"))
+
+filtered_df <- merged_df3[, "scv96", drop = FALSE]
+
+filtered_df <- na.omit(filtered_df)
+
+Idents(df96) <- "seurat_clusters"
+
+somite.bias <- FindMarkers(df96, only.pos = TRUE, pseudocount.use=0.1, ident.1="2", ident.2=c("1","0","3"), min.pct.diff=0.25)
+
+top <- somite.bias %>% top_n(n = 25, wt = avg_log2FC)
+
+somite.bias <- rownames(top)
+
+somite.bias <- str_to_title(somite.bias)
+
+somite.bias <-unique(somite.bias)%>% 
+    
+    as.data.frame() %>% 
+    
+    unique()
+
+neural.bias <- FindMarkers(df96, only.pos = TRUE, pseudocount.use=0.1, ident.1="0", ident.2=c("1","2","3"), min.pct.diff=0.25)
+
+top <- neural.bias %>% top_n(n = 25, wt = avg_log2FC)
+
+neural.bias <- rownames(top)
+
+neural.bias <- str_to_title(neural.bias)
+
+neural.bias <-unique(neural.bias)%>% 
+    
+    as.data.frame() %>% 
+    
+    unique()
+
+nmp <- FindMarkers(df96, only.pos = TRUE, pseudocount.use=0.1, ident.1="1", ident.2=c("0","2","3"), min.pct.diff=0.25)
+
+top <- nmp %>% top_n(n = 25, wt = avg_log2FC)
+
+nmp <- rownames(top)
+
+nmp <- str_to_title(nmp)
+
+nmp <-unique(nmp)%>% 
+    
+    as.data.frame() %>% 
+    
+    unique()
+
+filtered_df$Class <- "other"  # Initialize Class column with "other" for all rows
+
+# Define the desired rownames
+selected_genes2 <- somite.bias$.
+# Define the desired rownames
+selected_genes <- neural.bias$.
+# Define the desired rownames
+selected_genes3 <- nmp$.
+
+filtered_df$Class[rownames(filtered_df) %in% selected_genes] <- "neural.bias"  # Rows in selected_genes list
+filtered_df$Class[rownames(filtered_df) %in% selected_genes2] <- "somite.bias"  # Rows in selected_genes list
+filtered_df$Class[rownames(filtered_df) %in% selected_genes3] <- "nmp"  # Rows in selected_genes list
+
+set.seed(123)  # Set a seed for reproducibility
+random_rows <- sample(rownames(filtered_df)[!(rownames(filtered_df) %in% selected_genes)], 25)  # Randomly select 25 rows excluding selected_genes
+
+filtered_df$Class[rownames(filtered_df) %in% random_rows] <- sample(2:4, length(random_rows), replace = TRUE)  # Assign random classes (2, 3, 4) to selected random rows
+
+# Reorder the factor levels of the Class column
+filtered_df$Class <- factor(filtered_df$Class, levels = c("neural.bias", "nmp", "somite.bias", "2", "3", "4", "other"))
+
+# Create the boxplot with statistical test
+ggplot(filtered_df, aes(x = Class, y = scv96, fill = Class)) +
+    geom_boxplot() +
+    labs(x = "Class", y = expression(italic("CV2"))) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(size = 11),
+          axis.text.y = element_text(size = 11),
+          axis.title.y = element_text(size = 11, face = "italic"))
+
+# Perform pairwise Wilcoxon rank sum test with multiple testing correction
+test_results <- pairwise.wilcox.test(filtered_df$scv96, filtered_df$Class, p.adjust.method = "BH")
+
+# Print the test results
+print(test_results)
+
+——————————
+filtered_df <- merged_df3[, "scv120", drop = FALSE]
+
+filtered_df <- na.omit(filtered_df)
+
+Idents(df120) <- "sub_cluster"
+
+nmp.markers <- FindMarkers(df120, only.pos = TRUE, pseudocount.use=0.1, ident.1="2", ident.2=c("0","1", "5","6","7","c4 0","c4 1"), min.pct.diff=0.25)
+
+top <- nmp.markers %>% top_n(n = 25, wt = avg_log2FC)
+
+nmp.module <- rownames(top)
+
+nmp.module <- str_to_title(nmp.module)
+
+nmp.module <-unique(nmp.module)%>% 
+    
+    as.data.frame() %>% 
+    
+    unique()
+
+somite.markers <- FindMarkers(df120, only.pos = TRUE, pseudocount.use=0.1, ident.1="1", ident.2=c("2","0", "5","6","7","c4 0","c4 1"), min.pct.diff=0.25)
+
+top <- somite.markers %>% top_n(n = 25, wt = avg_log2FC)
+
+somite.module <- rownames(top)
+
+somite.module <- str_to_title(somite.module)
+
+somite.module <-unique(somite.module)%>% 
+    
+    as.data.frame() %>% 
+    
+    unique()
+
+neural.markers <- FindMarkers(df120, only.pos = TRUE, pseudocount.use=0.1, ident.1="0", ident.2=c("2","1", "5","6","7","c4 0","c4 1"), min.pct.diff=0.25)
+
+top <- neural.markers %>% top_n(n = 25, wt = avg_log2FC)
+
+neural.module <- rownames(top)
+
+neural.module <- str_to_title(neural.module)
+
+neural.module <-unique(neural.module)%>% 
+    
+    as.data.frame() %>% 
+    
+    unique()
+
+filtered_df$Class <- "other"  # Initialize Class column with "other" for all rows
+
+# Define the desired rownames
+selected_genes2 <- neural.module$.
+# Define the desired rownames
+selected_genes <- somite.module$.
+# Define the desired rownames
+selected_genes3 <- nmp.module$.
+
+filtered_df$Class[rownames(filtered_df) %in% selected_genes] <- "somitic"  # Rows in selected_genes list
+filtered_df$Class[rownames(filtered_df) %in% selected_genes2] <- "neural"  # Rows in selected_genes list
+filtered_df$Class[rownames(filtered_df) %in% selected_genes3] <- "nmp"  # Rows in selected_genes list
+
+set.seed(123)  # Set a seed for reproducibility
+random_rows <- sample(rownames(filtered_df)[!(rownames(filtered_df) %in% selected_genes)], 25)  # Randomly select 25 rows excluding selected_genes
+
+filtered_df$Class[rownames(filtered_df) %in% random_rows] <- sample(2:4, length(random_rows), replace = TRUE)  # Assign random classes (2, 3, 4) to selected random rows
+
+# Reorder the factor levels of the Class column
+filtered_df$Class <- factor(filtered_df$Class, levels = c("somitic", "nmp", "neural", "2", "3", "4", "other"))
+
+# Create the boxplot with statistical test
+ggplot(filtered_df, aes(x = Class, y = scv120, fill = Class)) +
+    geom_boxplot() +
+    labs(x = "Class", y = expression(italic("CV2"))) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(size = 11),
+          axis.text.y = element_text(size = 11),
+          axis.title.y = element_text(size = 11, face = "italic"))
+
+# Perform pairwise Wilcoxon rank sum test with multiple testing correction
+test_results <- pairwise.wilcox.test(filtered_df$scv120, filtered_df$Class, p.adjust.method = "BH")
+
+# Print the test results
+print(test_results)

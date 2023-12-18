@@ -1,0 +1,145 @@
+# Load required libraries
+require(Seurat)
+require(dplyr)
+require(Matrix)
+require(RColorBrewer)
+require(pdist)
+require(plyr)
+require(reshape)
+require(ggplot2)
+require(reshape2)
+library(openxlsx)
+require(gplots)
+require(corrplot)
+library(viridis)
+require(reshape2)
+require(gridExtra)
+library(cowplot)
+library(reticulate)
+library(umap)
+require(stringr)
+library(monocle3)
+library(SeuratWrappers)
+library(patchwork)
+require(viridis)
+require(tidyverse)
+require(smplot2)
+
+# Read the Seurat object from an RDS file
+df <- readRDS(“df”)
+
+# Set the default assay to "RNA"
+DefaultAssay(df) <- "RNA"
+
+# Set cluster identity as metadata identifier
+Idents(df) <- "seurat_clusters"
+
+# Find markers for the somitic cluster
+somite.markers <- FindMarkers(df, only.pos = TRUE, pseudocount.use=0.1, ident.1="1", ident.2=c("0","5","6","7","2","4"), min.pct.diff=0.25)
+
+# Select the top 25 markers based on average log2 fold change
+top <- somite.markers %>% top_n(n = 25, wt = avg_log2FC)
+
+# Extract row names as somite module
+somite.module <- rownames(top)
+
+# Convert module names to title case
+somite.module <- str_to_title(somite.module)
+
+# Create a unique dataframe of module names
+somite.module <- unique(somite.module) %>% 
+  as.data.frame() %>% 
+  unique()
+
+# Add module scores to the dataframe
+df <- AddModuleScore(df, features = somite.module, name = "somitic")
+
+# Find markers for the neural cluster
+neural.markers <- FindMarkers(df, only.pos = TRUE, pseudocount.use=0.1, ident.1="0", ident.2=c("1","5","6","7","2","4"), min.pct.diff=0.25)
+
+# Select the top 25 markers based on average log2 fold change
+top <- neural.markers %>% top_n(n = 25, wt = avg_log2FC)
+
+# Extract row names as neural module
+neural.module <- rownames(top)
+
+# Convert module names to title case
+neural.module <- str_to_title(neural.module)
+
+# Create a unique dataframe of module names
+neural.module <- unique(neural.module) %>% 
+  as.data.frame() %>% 
+  unique()
+
+# Add module scores to the dataframe
+df <- AddModuleScore(df, features = neural.module, name = "neural")
+
+# Set identifiers in the Seurat object
+Idents(df) <- "Sample.barcode"
+
+# Extract metadata from the Seurat object
+metadata <- df@meta.data
+head(metadata)
+
+# Create a data frame combining active.ident and metadata
+scores_df <- data.frame(df@active.ident, metadata) 
+
+ncol(scores_df)
+
+# Aggregate scores_df by active.ident
+scores_df <- aggregate(scores_df[,2:601], list(scores_df$df.active.ident), mean)
+scores_df_no_nas <- scores_df[, colSums(is.na(scores_df)) == 0]
+
+# Load the ronsFunctions package
+require(ronsFunctions)
+
+# Remove rows with zero standard deviation
+scores_df_no_nas <- remove0sd(scores_df_no_nas)
+ncol(scores_df)
+ncol(scores_df_no_nas)
+colnames(scores_df_no_nas)
+ncol(scores_df_no_nas)
+
+# Specify columns to combine
+start_col <- 1
+end_col <- 475
+combined_cols <- c(start_col, 34:end_col)
+
+# Create a new data frame by combining specified columns
+new_df <- scores_df_no_nas[, combined_cols]
+ncol(new_df)
+
+# Calculate Pearson correlation for neural and somitic columns
+mydata.cor.test.neural <- cor(new_df[, c(2:443)], new_df[, 443], method = "pearson")
+mydata.cor.test.somitic <- cor(new_df[, c(2:443)], new_df[, 442], method = "pearson")
+
+# Define row names to keep
+row_names_to_keep <- c("X072h_raw_CH__bf_mask_Intensity_MeanIntensity", "X096h_raw_CH_bra_mask_Intensity_MeanIntensity",
+                       "X096h_raw_CH_bra_mask_AreaShape_Area",
+                       "X096h_raw_CH_AreaShape_Bra_AreaFraction",
+                       "X096h_raw_CH__BF_mask_AreaShape_AreaMinorAxisLength",
+                       "X096h_raw_CH_bra_mask_AreaShape_MajorAxisLength",
+                       "X096h_raw_CH_bra_mask_AreaShape_Eccentricity",
+                       "X072h_raw_BF_AreaShape_area","X072h_raw_BF_AreaShape_perimeter","X072h_raw_BF_AreaShape_eccentricity","X072h_raw_BF_AreaShape_axis_minor_length","X072h_raw_BF_AreaShape_axis_major_length", "X096h_raw_BF_AreaShape_area","X096h_raw_BF_AreaShape_perimeter","X096h_raw_BF_AreaShape_eccentricity","X096h_raw_BF_AreaShape_axis_minor_length","X096h_raw_BF_AreaShape_axis_major_length","somitic1","neural1")
+
+# Filter matrices based on row names
+filtered_matrix.somitic <- mydata.cor.test.somitic[rownames(mydata.cor.test.somitic) %in% row_names_to_keep, , drop = FALSE]
+print(filtered_matrix.somitic)
+
+filtered_matrix.neural <- mydata.cor.test.neural[rownames(mydata.cor.test.neural) %in% row_names_to_keep, , drop = FALSE]
+print(filtered_matrix.neural)
+
+# Merge matrices based on row names
+combined_matrix_df <- merge(filtered_matrix.somitic, filtered_matrix.neural, by = 0, all = TRUE)
+rownames(combined_matrix_df) <- combined_matrix_df$Row.names
+
+# Convert the data frame to a matrix
+combined_matrix <- data.matrix(combined_matrix_df)
+
+# Remove the "Row.names" column
+combined_matrix <- combined_matrix[, -1]
+
+# Plot correlation matrix using corrplot
+corrplot(combined_matrix, col = COL2('PRGn', 200), tl.col = "black", addgrid = TRUE, tl.srt = 45)
+
+

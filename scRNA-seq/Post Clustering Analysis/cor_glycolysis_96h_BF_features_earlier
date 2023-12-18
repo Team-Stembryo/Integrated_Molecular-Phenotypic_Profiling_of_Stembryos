@@ -1,0 +1,80 @@
+Idents(df96) <- "Sample.barcode"
+
+metadata <- df96@meta.data
+
+head(metadata)
+
+scores_df <- data.frame(df96@active.ident, metadata) 
+
+ncol(scores_df)
+
+scores_df <- aggregate(scores_df[,2:596], list(scores_df$df96.active.ident), mean)
+
+scores_df_no_nas <- scores_df[, colSums(is.na(scores_df)) == 0]
+
+require(ronsFunctions)
+
+scores_df_no_nas <- remove0sd(scores_df_no_nas)
+ncol(scores_df)
+ncol(scores_df_no_nas)
+colnames(scores_df_no_nas)
+ncol(scores_df_no_nas)
+
+# Specify the columns to combine
+start_col <- 1
+end_col <- 475
+combined_cols <- c(start_col, 33:end_col)
+
+# Create a new data frame by combining the specified columns
+new_df <- scores_df_no_nas[, combined_cols]
+
+ncol(new_df)
+
+# Assuming you have the new_df dataframe
+
+# Filter columns based on column names that match the patterns
+new_df_BF_raw <- new_df[, grepl("^glycolysis1|^X048h_raw_BF|^X072h_raw_BF", colnames(new_df))]
+
+# Print the resulting filtered dataframe
+print(new_df_BF_raw)
+
+#mydata.cor = corr.test(new_df_BF_raw[,2:25], new_df_BF_raw[,1], method = c("pearson"))
+
+View(new_df_BF_raw)
+
+mydata.cor = corr.test(new_df_BF_raw[,2:17], new_df_BF_raw[,1], method = c("pearson"))
+
+mydata.cor2 <- cbind(as.numeric(rownames(mydata.cor$r)), mydata.cor$r, mydata.cor$p, mydata.cor$p.adj)
+
+mydata.cor2 <- as.data.frame(mydata.cor2)
+
+# Remove column 1 and rename columns 2, 3, and 4
+mydata.cor2 <- mydata.cor2 %>%
+    dplyr::select(-1) %>%
+    dplyr::rename(R = V2, p = V3, padj = V4)
+
+# Print the resulting filtered and modified dataframe
+print(mydata.cor2)
+
+View(mydata.cor2)
+
+# Assuming you have the mydata.cor2 dataframe
+
+# Create the plot
+ggplot(mydata.cor2, aes(x = R, y = -log10(padj))) +
+    geom_point(aes(size = -log10(padj), color = ifelse(grepl("^X048", rownames(mydata.cor2)), "red", "blue")),
+               alpha = 0.7) +
+    geom_text(data = subset(mydata.cor2, padj < 0.1026), aes(label = rownames(subset(mydata.cor2, padj < 0.1026))), 
+              size = 3, vjust = -0.5, hjust = 0.5, color = "black", nudge_y = 0.1) +
+    geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +  # Add the horizontal line for padj = 0.05
+    geom_hline(yintercept = -log10(0.1), linetype = "dashed", color = "grey") +  # Add the horizontal line for padj = 0.1
+    labs(x = "R",
+         y = "-log10(padj)") +  # Remove plot title
+    theme_minimal(base_size = 20) +  # Set font size to 12
+    scale_size_continuous(name = "-log10(padj)", range = c(3, 10)) +
+    scale_color_identity(guide = "legend", breaks = c("red", "blue"), labels = c("48h", "72h")) +  # Add a legend for dot color
+    geom_vline(xintercept = 0, linetype = "dashed", color = "black") +
+    coord_cartesian(ylim = c(0, 2.5), xlim = c(-0.3, 0.7)) +  # Set axis limits
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.background = element_rect(fill = "white"))

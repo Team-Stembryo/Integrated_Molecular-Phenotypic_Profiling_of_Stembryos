@@ -1,0 +1,103 @@
+# Add pseudotime information to the metadata of the Seurat object (df48)
+## follow same procedure for other timepoints
+
+df48 <- AddMetaData(
+    object = df48,
+    metadata = cds@principal_graph_aux@listData$UMAP$pseudotime,
+    col.name = "pseudotime"
+)
+
+barcode_counts <- table(df48@meta.data$Sample.barcode)
+selected_barcodes <- names(barcode_counts[barcode_counts > 20])
+
+# First, convert selected_barcodes to a character vector
+selected_barcodes <- as.character(selected_barcodes)
+
+# Next, subset the metadata of df72c to only include samples with Sample.barcode in selected_barcodes
+selected_samples <- df48@meta.data$Sample.barcode %in% selected_barcodes
+df48_sub <- df48[,selected_samples]
+
+# Aggregate gene expression data for each sample
+a <- AggregateExpression(df48_sub, group.by = "Sample.barcode")$RNA
+
+# Calculate counts per million (CPM) and normalize
+sum_counts <- colSums(a)
+a_cpm <- t(t(a) / sum_counts) * 1e6
+
+# Display total counts per sample
+colSums(a_cpm)
+
+# Create a matrix (mat) with pseudotime and sample information
+t <- as.numeric(df48_sub@meta.data$pseudotime)
+s <- df48_sub@meta.data$Sample.barcode
+mat <- cbind(t, s)
+colnames(mat) <- c("pseudotime", "sample")
+mat <- as.data.frame(mat)
+
+# Aggregate pseudotime information for each sample
+mat2 <- aggregate(mat[, 1], list(mat$sample), mean)
+mat2 <- t(mat2)
+rownames(mat2) <- rownames(s)
+
+# Combine pseudotime information with CPM data
+mat2 <- as.data.frame(mat2)
+rownames(mat2) <- c("barcode", "pseudotime")
+mat2 <- t(mat2)
+a_cpm <- t(a_cpm)
+
+# Sort rows based on the numeric part of the row names
+current_row_names <- rownames(a_cpm)
+numeric_part <- as.numeric(gsub("Bar", "", current_row_names))
+sorted_row_names <- paste0("Bar", sort(numeric_part))
+sorted_a_cpm <- a_cpm[sorted_row_names, ]
+
+# Combine pseudotime, sample, and sorted CPM data
+mat3 <- cbind(mat2, sorted_a_cpm)
+mat3 <- mat3[,-1]
+mat3 <- as.data.frame(mat3)
+
+# Perform Pearson correlation analysis between pseudotime and gene expression
+require(psych)
+correlations <- corr.test(mat3[,-1], mat3$pseudotime, use = "pairwise", method = "pearson", adjust = "holm", 
+                          alpha = .05, ci = TRUE, minlength = 5, normal = TRUE)
+
+# Extract relevant information from the correlation results
+correlations2 <- cbind(as.numeric(rownames(correlations$r)), correlations$r, correlations$p, correlations$p.adj)
+correlations2 <- correlations2[, -1]
+colnames(correlations2) <- c("r", "p", "padj")
+correlations2 <- correlations2[complete.cases(correlations2), ]
+
+# Convert the correlation matrix to a data frame
+correlations_df <- as.data.frame(correlations2)
+
+# Select the top 10 genes with the highest and lowest correlation
+top10_high_corr <- head(order(correlations_df$r, decreasing = TRUE), 10)
+top10_low_corr <- head(order(correlations_df$r), 10)
+
+# Create dotplots for genes with the highest and lowest correlation
+dotplot_high <- ggplot(correlations_df[top10_high_corr, ], aes(x = r, y = reorder(rownames(correlations_df)[top10_high_corr], r))) +
+    geom_point(aes(color = -log10(p), size = 0.25), alpha = 0.8) +
+    scale_size_continuous(guide = FALSE) +
+    scale_color_gradient2(low = "blue", mid = "white", high = "red", midpoint = 0) +
+    xlab("Correlation (r)") +
+    ylab("Genes") +
+    ggtitle("Highest Correlation") +
+    theme_minimal()
+
+dotplot_low <- ggplot(correlations_df[top10_low_corr, ], aes(x = r, y = reorder(rownames(correlations_df)[top10_low_corr], r))) +
+    geom_point(aes(color = -log10(p), size = 0.25), alpha = 0.8) +
+    scale_size_continuous(guide = FALSE) +
+    scale_color_gradient2(low = "red", mid = "white", high = "blue", midpoint = 0) +
+    xlab("Correlation (r)") +
+    ylab("Genes") +
+    ggtitle("Lowest Correlation") +
+    theme_minimal()
+
+# Display the dotplots
+dotplot_high
+dotplot_low
+
+# Combine dotplots into a single plot using the patchwork library
+library(patchwork)
+combined_plot <- dotplot_low + dotplot_high + plot_layout(ncol = 2)
+combined_plot

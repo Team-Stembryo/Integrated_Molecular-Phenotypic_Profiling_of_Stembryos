@@ -1,0 +1,172 @@
+# Set the default assay to "RNA" in Seurat object
+DefaultAssay(df120) <- "RNA"
+
+# Set seed for reproducibility
+set.seed(2345)
+
+# Convert Seurat object to Monocle3 cell data set and perform clustering
+cds <- as.cell_data_set(df120)
+cds <- cluster_cells(cds, resolution = 5e-4)
+
+# Plot cells colored by cluster and partition
+p1 <- plot_cells(cds, color_cells_by = "cluster", show_trajectory_graph = FALSE)
+p2 <- plot_cells(cds, color_cells_by = "partition", show_trajectory_graph = FALSE)
+wrap_plots(p1, p2)
+
+# Further analyze the trajectory
+cds <- learn_graph(cds, use_partition = TRUE, verbose = FALSE)
+cds <- order_cells(cds, root_cells = colnames(cds[, clusters(cds) == c(2)]))
+
+# Plot cells along the trajectory colored by pseudotime
+plot_cells(cds,
+           color_cells_by = "pseudotime",
+           label_cell_groups = FALSE,
+           label_groups_by_cluster = FALSE,
+           label_leaves = FALSE,
+           label_branch_points = FALSE,
+           label_roots = FALSE,
+           trajectory_graph_color = "red")
+
+# Add partition information to the original Seurat object
+df120 <- AddMetaData(object = df120,
+                     metadata = cds@clusters@listData$UMAP$partitions,
+                     col.name = "partition")
+Idents(df120) <- "partition"
+
+# Subset the Seurat object based on partition "1"
+df120s <- subset(df120, idents = "1")
+
+# Add pseudotime information to df120s
+df120s <- AddMetaData(object = df120s,
+                      metadata = cds@principal_graph_aux@listData$UMAP$pseudotime,
+                      col.name = "pseudotime")
+
+# FeaturePlot for visualizing gene expression along pseudotime in the integrated.sub object
+FeaturePlot(integrated.sub, "monocle3_pseudotime") + scale_color_viridis_c()
+
+# Annotate the cell data set (cds) with gene short names from the original Seurat object (df120)
+cds@rowRanges@elementMetadata@listData[["gene_short_name"]] <- rownames(df120[["RNA"]])
+
+# Estimate size factors for normalization in the cell data set (cds)
+cds <- estimate_size_factors(cds)
+
+# Define a list of genes for further analysis - example
+cds_genes <- c("Tcf15", "Meox1")
+
+# Subset the Monocle3 cell data set for the specified genes
+lineage_cds <- cds[rowData(cds)$gene_short_name %in% cds_genes]
+
+# Plot gene expression along pseudotime
+plot_genes_in_pseudotime(lineage_cds, ncol = 3, min_expr = 0)
+
+## for 96 hours
+
+# Convert the Seurat object (df96) to a Monocle3 cell data set (cds)
+cds <- as.cell_data_set(df96)
+
+# Cluster cells with a specified resolution
+cds <- cluster_cells(cds, resolution = 2e-3)
+
+# Plot cells colored by cluster and partition, wrapping the plots side by side
+p1 <- plot_cells(cds, color_cells_by = "cluster", show_trajectory_graph = FALSE)
+p2 <- plot_cells(cds, color_cells_by = "partition", show_trajectory_graph = FALSE)
+wrap_plots(p1, p2)
+
+# Display the first plot
+p1
+
+# Subset and convert the data for cells in monocle3_partitions equal to 1
+integrated.sub <- subset(as.Seurat(cds, assay = NULL), monocle3_partitions == 1)
+cds <- as.cell_data_set(integrated.sub)
+
+# Learn the trajectory graph using partition information
+cds <- learn_graph(cds, use_partition = TRUE, verbose = FALSE)
+
+# Order cells along the trajectory, specifying root cells from cluster 3
+cds <- order_cells(cds, root_cells = colnames(cds[, clusters(cds) == c(3)]))
+
+# Plot cells colored by pseudotime along the learned trajectory
+plot_cells(cds,
+           color_cells_by = "pseudotime",
+           label_cell_groups = FALSE,
+           label_groups_by_cluster = FALSE,
+           label_leaves = FALSE,
+           label_branch_points = FALSE,
+           label_roots = FALSE,
+           trajectory_graph_color = "red")
+
+# Convert the cell data set to a Seurat object for visualization
+integrated.sub <- as.Seurat(cds, assay = NULL)
+
+# FeaturePlot to visualize gene expression along pseudotime, using a specific color scale
+FeaturePlot(integrated.sub, "monocle3_pseudotime") + scale_color_viridis_c()
+
+# Annotate the Monocle3 cell data set with gene short names from the original Seurat object
+cds@rowRanges@elementMetadata@listData[["gene_short_name"]] <- rownames(df96[["RNA"]])
+
+# Estimate size factors for normalization
+cds <- estimate_size_factors(cds)
+
+# Define a list of genes for further analysis
+cds_genes <- c("T", "Sox2", "Fgf8", "Rspo3", "Fgf17", "Rfx4", "Sox1", "Tcf15", "Meox1", "Tbx6", "Cdx2","Epha5", "Hoxb8", "Sox3", "Cdx4", "Cyp26a1", "Wnt8a", "Wnt5b", "Hoxc8", "Fgf4", "Nkx1-2")
+
+# Subset the Monocle3 cell data set for the specified genes
+lineage_cds <- cds[rowData(cds)$gene_short_name %in% cds_genes]
+
+# Plot gene expression along pseudotime for selected genes
+plot_genes_in_pseudotime(lineage_cds, ncol = 3, min_expr = 0.5)
+
+## for 48 hours
+
+# Convert the Seurat object (df48) to a Monocle3 cell data set (cds)
+cds <- as.cell_data_set(df48)
+
+# Cluster cells with a specified resolution
+cds <- cluster_cells(cds, resolution = 1.5e-3)
+
+# Plot cells colored by cluster and partition, wrapping the plots side by side
+p1 <- plot_cells(cds, color_cells_by = "cluster", show_trajectory_graph = FALSE)
+p2 <- plot_cells(cds, color_cells_by = "partition", show_trajectory_graph = FALSE)
+wrap_plots(p1, p2)
+
+# Display the first plot
+p1
+
+# Learn the trajectory graph using partition information
+cds <- learn_graph(cds, use_partition = TRUE, verbose = FALSE)
+
+# Order cells along the trajectory, specifying root cells from cluster 5
+cds <- order_cells(cds, root_cells = colnames(cds[, clusters(cds) == c(5)]))
+
+# Plot cells colored by pseudotime along the learned trajectory
+plot_cells(cds,
+           color_cells_by = "pseudotime",
+           label_cell_groups = FALSE,
+           label_groups_by_cluster = FALSE,
+           label_leaves = FALSE,
+           label_branch_points = FALSE,
+           label_roots = FALSE,
+           trajectory_graph_color = "red")
+
+# Convert the cell data set to a Seurat object for visualization
+integrated.sub <- as.Seurat(cds, assay = NULL)
+
+# FeaturePlot to visualize gene expression along pseudotime, using a specific color scale
+FeaturePlot(integrated.sub, "monocle3_pseudotime") + scale_color_viridis_c()
+
+# Annotate the Monocle3 cell data set with gene short names from the original Seurat object
+cds@rowRanges@elementMetadata@listData[["gene_short_name"]] <- rownames(df48[["RNA"]])
+
+# Estimate size factors for normalization
+cds <- estimate_size_factors(cds)
+
+# Define a list of genes for further analysis
+ cds_genes <- c("Zfp42", "Fbxo15","Fgf5", "Nes", "Otx2", "Fgf4", "Pou5f1", "Dnmt3l", "Dnmt3a", "Dnmt3b", "Sema6a", "Nodal","Lefty1", "Nr0b1", "Klf2", "Zic5", "Nanog", "Lin28b", "Zic2", "Lef1", "Sox2", "T", "Foxa2", "Eomes", "Sox3", "Sox1", "Wnt3")
+
+# Subset the Monocle3 cell data set for the specified genes
+lineage_cds <- cds[rowData(cds)$gene_short_name %in% cds_genes]
+
+# Plot gene expression along pseudotime for selected genes
+plot_genes_in_pseudotime(lineage_cds, ncol = 3, min_expr = 0.3)
+
+

@@ -1,0 +1,186 @@
+barcode_counts <- table(df48@meta.data$Sample.barcode)
+selected_barcodes <- names(barcode_counts[barcode_counts > 20])
+
+# First, convert selected_barcodes to a character vector
+selected_barcodes <- as.character(selected_barcodes)
+
+# Next, subset the metadata of df72c to only include samples with Sample.barcode in selected_barcodes
+selected_samples <- df48@meta.data$Sample.barcode %in% selected_barcodes
+df48_sub <- df48[,selected_samples]
+
+cell_type_proportions <- data.frame(prop.table(table(df48_sub@meta.data$Sample.barcode, df48_sub@meta.data$seurat_clusters), margin = 1))
+
+ggplot(cell_type_proportions, aes(x="", y=Freq, fill=Var2)) +
+    geom_bar(stat="identity", width=1) +
+    coord_polar("y", start=0) +
+        theme_void() + facet_wrap(~Var1)
+
+#calculate CV2 per cell state
+
+result_48 <- aggregate(Freq ~ Var2, cell_type_proportions, function(x) {
+    cv <- sd(x) / mean(x)
+    cv_sq <- cv^2
+    return(cv_sq)
+})
+
+barcode_counts <- table(df72@meta.data$Sample.barcode)
+selected_barcodes <- names(barcode_counts[barcode_counts > 20])
+
+# First, convert selected_barcodes to a character vector
+selected_barcodes <- as.character(selected_barcodes)
+
+# Next, subset the metadata of df72c to only include samples with Sample.barcode in selected_barcodes
+selected_samples <- df72@meta.data$Sample.barcode %in% selected_barcodes
+df72_sub <- df72[,selected_samples]
+
+cell_type_proportions <- data.frame(prop.table(table(df72_sub@meta.data$Sample.barcode, df72_sub@meta.data$seurat_clusters), margin = 1))
+
+ggplot(cell_type_proportions, aes(x="", y=Freq, fill=Var2)) +
+    geom_bar(stat="identity", width=1) +
+    coord_polar("y", start=0) +
+        theme_void() + facet_wrap(~Var1)
+
+#calculate CV2 per cell state
+
+result_72 <- aggregate(Freq ~ Var2, cell_type_proportions, function(x) {
+    cv <- sd(x) / mean(x)
+    cv_sq <- cv^2
+    return(cv_sq)
+})
+
+cell_type_proportions <- data.frame(prop.table(table(df96@meta.data$Sample.barcode, df96@meta.data$seurat_clusters), margin = 1))
+
+ggplot(cell_type_proportions, aes(x="", y=Freq, fill=Var2)) +
+    geom_bar(stat="identity", width=1) +
+    coord_polar("y", start=0) +
+        theme_void() + facet_wrap(~Var1)
+
+#calculate CV2 per cell state
+
+result_96 <- aggregate(Freq ~ Var2, cell_type_proportions, function(x) {
+    cv <- sd(x) / mean(x)
+    cv_sq <- cv^2
+    return(cv_sq)
+})
+
+cell_type_proportions <- data.frame(prop.table(table(df120@meta.data$Sample.barcode, df120@meta.data$seurat_clusters), margin = 1))
+
+ggplot(cell_type_proportions, aes(x="", y=Freq, fill=Var2)) +
+    geom_bar(stat="identity", width=1) +
+    coord_polar("y", start=0) +
+        theme_void() + facet_wrap(~Var1)
+
+#calculate CV2 per cell state
+
+result_120 <- aggregate(Freq ~ Var2, cell_type_proportions, function(x) {
+    cv <- sd(x) / mean(x)
+    cv_sq <- cv^2
+    return(cv_sq)
+})
+
+#cell_type_proportions <- data.frame(prop.table(table(df120m@meta.data$Sample.barcode, df120m@meta.data$merged_clusters), margin = 1))
+
+ggplot(cell_type_proportions, aes(x="", y=Freq, fill=Var2)) +
+    geom_bar(stat="identity", width=1) +
+    coord_polar("y", start=0) +
+        theme_void() + facet_wrap(~Var1)
+
+# Create a list of data frames with their respective time information
+df_list <- list(result_48 = result_48, result_72 = result_72, result_96 = result_96, result_120 = result_120)
+
+# Combine the data frames into a single data frame with additional columns for the original dataframe name and time
+combined_df <- data.frame()
+for (i in seq_along(df_list)) {
+  df <- df_list[[i]]
+  time <- names(df_list)[i]
+  
+  # Add original_dataframe and time columns
+  df <- transform(df, original_dataframe = rep(names(df), nrow(df)), time = time)
+  
+  # Append to combined_df
+  combined_df <- rbind(combined_df, df)
+}
+
+# Remove rows with duplicate values in Freq
+combined_df <- combined_df[!duplicated(combined_df$Freq), ]
+
+# View the updated data frame
+print(combined_df)
+
+# View the combined data frame
+print(combined_df)
+
+# Reset row names of the combined data frame
+rownames(combined_df) <- NULL
+
+# View the updated combined data frame
+print(combined_df)
+
+# Filter out rows with Var2 = "3" and time = "result_120"
+combined_df <- combined_df[!(combined_df$Var2 == "3" & combined_df$time == "result_120"), ]
+
+# Reset row names of the combined data frame
+rownames(combined_df) <- NULL
+
+# View the updated combined data frame
+print(combined_df)
+
+# Remove the original_dataframe column
+combined_df <- combined_df[, !(names(combined_df) %in% "original_dataframe")]
+
+# Remove the "result_" prefix from the time column
+combined_df$time <- sub("result_", "", combined_df$time)
+
+# View the updated combined data frame
+print(combined_df)
+
+# Rename the columns
+combined_df <- transform(combined_df, cluster = Var2, CV2 = Freq)
+
+library(ggplot2)
+library(showtext)
+# Set font properties
+#font_add_google(name = "Roboto", family = "Roboto")
+#showtext_auto()
+
+# Rename the columns
+combined_df <- transform(combined_df, cluster = Var2, CV2 = Freq)
+
+# Reorder levels of time variable
+combined_df$time <- forcats::fct_inorder(combined_df$time, ordered = TRUE)
+
+# Generate the barplot with reordered facets and free x-axis and y-axis scales
+p <- ggplot(combined_df, aes(x = cluster, y = CV2, fill = time)) +
+    geom_bar(stat = "identity", position = "dodge") +
+    labs(x = "Cluster", y = expression(italic("CV2")), fill = "Time") +
+    facet_wrap(~ time, scales = "free_x", ncol = 2) +
+    theme_minimal() +
+    theme(axis.text = element_text(size = 12),
+          legend.title = element_text(size = 12),
+          legend.text = element_text(size = 12),
+          strip.text = element_text(size = 12))  # Adjust the font size of strip text
+
+# Display the barplot
+print(p)
+
+# Generate the barplot without the legend
+p <- ggplot(combined_df, aes(x = cluster, y = CV2, fill = time)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(x = "Cluster", y = expression(italic("CV2"))) +
+  facet_wrap(~ time, scales = "free_x", ncol = 2) +
+  theme_minimal() +
+  theme(axis.text = element_text(size = 12, angle = 45, hjust = 1),
+        strip.text = element_text(size = 12))
+
+# Remove the legend
+p <- p + theme(legend.position = "none")
+
+# Display the modified plot
+print(p)
+
+
+
+
+
+
+

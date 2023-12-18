@@ -1,0 +1,91 @@
+# Starting with a df with CPM per gene and area
+
+filtered_df <- df[df$Area < 62500 | df$Area > 67500, ]
+
+# Create a new column "Category" based on "Area" values
+filtered_df$Category <- ifelse(filtered_df$Area < 67500, "small", "large")
+
+# Remove the "Area" column if you no longer need it
+filtered_df <- filtered_df[, -which(names(filtered_df) == "Area")]
+
+df_72_size <- filtered_df
+
+# Create unique row names based on the "Category" column
+unique_row_names <- make.unique(as.character(df_72_size$Category))
+rownames(df_72_size) <- unique_row_names
+
+# Remove the "Category" column
+df_72_size <- df_72_size[, -which(names(df_72_size) == "Category")]
+
+df_72_size <- t(df_72_size)
+
+# Calculate row means
+row_means <- rowMeans(df_72_size)
+
+# Filter rows with row means greater than 1
+df_72_size_filtered <- df_72_size[row_means > 1, ]
+
+dge <- DGEList(counts = df_72_size_filtered)
+
+sample_names <- colnames(dge)
+
+groups <- factor(grepl("small", sample_names))
+
+# Design matrix (assuming simple comparison)
+design <- model.matrix(~groups)
+
+# Estimate dispersion
+dge <- estimateDisp(dge, design)
+
+# Fit the negative binomial model
+fit <- glmQLFit(dge, design)
+
+# Perform the differential expression analysis
+qlf <- glmQLFTest(fit, coef = 2)  # Compare "large" to "small"
+
+# Extract the results
+results <- topTags(qlf, n = nrow(df_72_size_filtered))
+
+# Filter for significant genes (adjust p-value threshold as needed)
+significant_genes <- results$table[results$table$FDR < 0.05, ]
+
+# View the top significant genes
+head(significant_genes)
+results.2 <- as.data.frame(results)
+View(results.2)
+
+selected_genes <- rownames(significant_genes)
+
+# Identify which samples belong to "small" and "large" categories based on column names
+sample_categories <- ifelse(grepl("small", colnames(df_72_size)), "small", "large")
+
+# Create a new dataframe with log-transformed values, sample categories, and selected genes
+logCPM_df <- data.frame(Category = sample_categories, t(df_72_size[selected_genes, ]))
+
+# Create a boxplot with individual data points for selected genes by category
+p3 <- ggplot(data = logCPM_df, aes(x = Category, y = log2(Fgf8))) +
+    geom_boxplot() +
+    geom_jitter(aes(color = Category), width = 0.2, alpha = 0.7) +  # Add jittered data points
+    labs(x = "Category", y = "log2(Fgf8)") +
+    theme_minimal()
+
+# Assuming you have already created plots p1, p2, and p3
+
+# Load the gridExtra library
+library(gridExtra)
+# Assuming you have already created plots p1, p2, and p3
+
+# Load the gridExtra library
+library(gridExtra)
+
+# Remove legends from individual plots
+p1 <- p1 + theme(legend.position = "none")
+p2 <- p2 + theme(legend.position = "none")
+p3 <- p3 + theme(legend.position = "none")
+
+# Combine the plots into a single plot grid without the legends
+combined_plot <- grid.arrange(p1, p2, p3, ncol = 3)
+
+# Display the combined plot
+print(combined_plot)
+l

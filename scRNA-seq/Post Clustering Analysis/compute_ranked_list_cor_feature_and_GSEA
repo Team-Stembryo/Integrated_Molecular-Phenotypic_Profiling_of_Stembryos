@@ -1,0 +1,189 @@
+## example for [Intensity]-TmCH 96h in NMP
+
+# Aggregate expression data based on the grouping variable
+a <- AggregateExpression(df96s, group.by = "X096h_raw_CH_bra_mask_Intensity_MeanIntensity")$RNA
+
+# Calculate the sum of counts for each sample
+sum_counts <- colSums(a)
+
+# Normalize counts to counts per million (CPM)
+a_cpm <- t(t(a) / sum_counts) * 1e6
+
+# Confirm normalization by checking sum of counts in CPM
+colSums(a_cpm)
+
+# Store normalized data in 'pseudoBulk_96h'
+a <- a_cpm
+pseudoBulk_96h <- a
+
+# Prepare data for correlation analysis
+b <- rbind(as.numeric(colnames(pseudoBulk_96h)), pseudoBulk_96h)
+b <- t(b)
+colnames(b)[1] <- "BRA_Intensity"
+c <- as.data.frame(b)
+
+# Calculate Spearman correlations and store results
+correlations <- corr.test(c[-1], c$BRA_Intensity, use = "pairwise", method = "spearman", adjust = "holm", alpha = .05, ci = TRUE, minlength = 5, normal = TRUE)
+correlations2 <- cbind(as.numeric(rownames(correlations$r)), correlations$r, correlations$p, correlations$p.adj)
+
+# Convert correlation results to a data frame
+correlations2 <- as.data.frame(correlations2)
+
+# Rename columns for clarity
+correlations2 <- correlations2 %>% select(-V1)
+names(correlations2) <- c("r", "p", "padj")
+
+# Remove rows with NA values
+correlations2 <- na.omit(correlations2)
+
+# Prepare data for visualization
+new_cor <- data.frame(id = rownames(correlations2), r = correlations2$r)
+
+# Order data by descending correlation values
+new_cor <- new_cor[order(-new_cor$r), ]
+
+# Convert to a data frame for gene list
+gene_list <- as.data.frame(new_cor)
+
+# Perform GSEA using WebGestaltR
+
+require(WebGestaltR)
+
+gsea_results_bra_intensity_96h <- WebGestaltR(
+    enrichMethod = "GSEA",
+    organism = "mmusculus",
+    enrichDatabase = c("geneontology_Biological_Process_noRedundant", "geneontology_Molecular_Function_noRedundant", "pathway_KEGG", "pathway_Panther"),
+    enrichDatabaseType = "genesymbol",
+    enrichDatabaseDescriptionFile = NULL,
+    interestGene = gene_list,
+    interestGeneType = "genesymbol",
+    collapseMethod = "mean",
+    referenceGeneFile = NULL,
+    referenceGene = NULL,
+    referenceGeneType = NULL,
+    referenceSet = NULL,
+    minNum = 3, maxNum = 500,
+    sigMethod = "fdr",
+    fdrMethod = "BH",
+    fdrThr = 1,
+    topThr = 10,
+    reportNum = 20,
+    perNum = 250,
+    gseaP = 1,
+    isOutput = TRUE,
+    outputDirectory = getwd(),
+    projectName = NULL,
+    dagColor = "continuous",
+    saveRawGseaResult = FALSE,
+    gseaPlotFormat = c("png", "svg"),
+    setCoverNum = 10,
+    networkConstructionMethod = NULL,
+    neighborNum = 10,
+    highlightType = "Seeds",
+    highlightSeedNum = 10,
+    nThreads = 1,
+    cache = NULL,
+    hostName = "https://www.webgestalt.org/",
+)
+
+# Save GSEA results to CSV file
+
+write.csv(gsea_results_bra_fraction_96h, "gsea_results_df96_bra_intensity_spearman.csv")
+
+## example for [Fraction]-TmCH 96h in NMP
+
+# Aggregate expression data based on the grouping variable
+
+a <- AggregateExpression(df96s, group.by ="X096h_raw_CH_AreaShape_Bra_AreaFraction")$RNA
+
+# Assuming 'a' is the dataframe with RNA count values
+
+# Calculate the sum of counts for each sample
+sum_counts <- colSums(a)
+
+# Normalize counts to counts per million (CPM)
+
+a_cpm <- t(t(a) / sum_counts) * 1e6
+
+# Confirm normalization by checking sum of counts in CPM
+
+colSums(a_cpm)
+
+a <- a_cpm
+
+# Store normalized data in 'pseudoBulk_96h'
+
+pseudoBulk_96h <- a
+
+# Prepare data for correlation analysis
+
+b <- rbind(as.numeric(colnames(pseudoBulk_96h)), pseudoBulk_96h)
+b <- t(b)
+colnames(b)[1] <- "BRA_Fraction"
+c <- as.data.frame(b)
+
+# Calculate Spearman correlations and store results
+
+correlations <- corr.test(c[-1], c$BRA_Fraction, use = "pairwise",method="spearman",adjust="holm", 
+                          alpha=.05,ci=TRUE,minlength=5,normal=TRUE)
+correlations2 <- cbind(as.numeric(rownames(correlations$r)), correlations$r, correlations$p, correlations$p.adj)
+
+# Convert correlation results to a data frame
+correlations2 <- as.data.frame(correlations2)
+
+# Rename columns for clarity
+correlations2 <- correlations2 %>% select(-V1)
+names(correlations2) <- c("r", "p", "padj")
+
+# Remove rows with NA values
+correlations2 <- na.omit(correlations2)
+
+# Prepare data for visualization
+new_cor <- data.frame(id = rownames(correlations2), r = correlations2$r)
+
+# Order data by descending correlation values
+new_cor <- new_cor[order(-new_cor$r), ]
+
+# Convert to a data frame for gene list
+gene_list <- as.data.frame(new_cor)
+
+# Perform GSEA using WebGestaltR
+
+require(WebGestaltR)
+
+gsea_results_bra_fraction_96h <- WebGestaltR(
+    enrichMethod = "GSEA",
+    organism = "mmusculus",
+    enrichDatabase = c("geneontology_Biological_Process_noRedundant", "geneontology_Molecular_Function_noRedundant", "pathway_KEGG", "pathway_Panther"),
+    enrichDatabaseType = "genesymbol",
+    enrichDatabaseDescriptionFile = NULL,
+    interestGene = gene_list,
+    interestGeneType = "genesymbol",
+    collapseMethod = "mean",
+    referenceGeneFile = NULL,
+    referenceGene = NULL,
+    referenceGeneType = NULL,
+    referenceSet = NULL,
+    minNum = 3, maxNum = 500,
+    sigMethod = "fdr",
+    fdrMethod = "BH",
+    fdrThr = 1,
+    topThr = 10,
+    reportNum = 20,
+    perNum = 250,
+    gseaP = 1,
+    isOutput = TRUE,
+    outputDirectory = getwd(),
+    projectName = NULL,
+    dagColor = "continuous",
+    saveRawGseaResult = FALSE,
+    gseaPlotFormat = c("png", "svg"),
+    setCoverNum = 10,
+    networkConstructionMethod = NULL,
+    neighborNum = 10,
+    highlightType = "Seeds",
+    highlightSeedNum = 10,
+    nThreads = 1,
+    cache = NULL,
+    hostName = "https://www.webgestalt.org/",
+)

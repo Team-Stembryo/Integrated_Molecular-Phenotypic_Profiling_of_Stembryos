@@ -1,0 +1,117 @@
+# Load required libraries
+
+library(Seurat)
+library(dplyr)
+library(Matrix)
+library(RColorBrewer)
+library(pdist)
+library(plyr)
+library(reshape)
+library(ggplot2)
+library(reshape2)
+library(openxlsx)
+library(gplots)
+library(corrplot)
+library(viridis)
+library(reshape2)
+library(gridExtra)
+library(cowplot)
+library(reticulate)
+library(umap)
+library(monocle3)
+library(SeuratWrappers)
+library(patchwork)
+library(viridis)
+library(tidyverse)
+library(smplot2)
+
+# Read the data
+
+df96 <- readRDS("df96v2_updated_morphodata.rds")
+DefaultAssay(df96) <- "RNA"
+
+# Compute glycolysis module scores
+
+Idents(df96) <- "Sample.barcode"
+
+glycolysis <- read.csv("glycolysis.csv")
+
+glycolysis <- glycolysis[,2]
+
+glycolysis <- str_to_title(glycolysis)
+
+glycolysis <-unique(glycolysis)%>% 
+
+as.data.frame() %>% 
+
+unique()
+
+# Compute oxphos module scores
+
+oxphos <- read.csv("oxphos.csv")
+
+oxphos <- oxphos[,2]
+
+oxphos <- str_to_title(oxphos)
+
+oxphos <-unique(oxphos)%>% 
+    
+    as.data.frame() %>% 
+    
+      unique()
+
+# Add module scores to Seurat object
+
+df96 <- AddModuleScore(df96, features = oxphos, 
+                     name = "oxphos")
+
+df96 <- AddModuleScore(df96, features = glycolysis, 
+                     name = "glycolysis")
+
+
+# Assign BRA_Intensity based on quantiles
+## Same procedure was followed for other features, including X072h_raw_CH__bf_mask_Intensity_MeanIntensity and X096h_raw_CH_AreaShape_Bra_AreaFraction
+
+quantile(df96@meta.data$X096h_raw_CH_bra_mask_Intensity_MeanIntensity, prob = seq(0, 1, length = 5), type = 5)
+
+df96@meta.data$BRA_Intensity <- '4'
+df96@meta.data$BRA_Intensity[which(df96@meta.data$X096h_raw_CH_bra_mask_Intensity_MeanIntensity < 30.06601)] <- '3'
+df96@meta.data$BRA_Intensity[which(df96@meta.data$X096h_raw_CH_bra_mask_Intensity_MeanIntensity < 26.83593)] <- '2'
+df96@meta.data$BRA_Intensity[which(df96@meta.data$X096h_raw_CH_bra_mask_Intensity_MeanIntensity < 24.16301)] <- '1'
+
+# Set Idents to BRA_Intensity
+
+Idents(df96) <- "BRA_Intensity"
+
+# Create a data frame for scores
+scores_df <- data.frame(df96@meta.data$glycolysis1, df96@active.ident, df96@meta.data$seurat_clusters)
+scores_df <- rownames_to_column(scores_df, var = "cell")
+colnames(scores_df) <- c("cell", "value", "BRA_Intensity", "cluster")
+
+# Subset data if focusing on neuromesodermal progenitor cluster
+## if interested in all cells, skip this step
+
+Idents(df96) <- "seurat_clusters"
+df96s <- subset(df96, idents = 1)
+Idents(df96s) <- "BRA_Intensity"
+
+# Create scores_df for subset
+
+scores_dfs <- data.frame(df96s@meta.data$glycolysis1, df96s@active.ident, df96s@meta.data$seurat_clusters)
+scores_dfs <- rownames_to_column(scores_dfs, var = "cell")
+colnames(scores_dfs) <- c("cell", "value", "BRA_Intensity", "cluster")
+
+# To create scores_df including delta oxphos-glycolysis
+
+scores_dfs <- data.frame(df96s@meta.data$oxphos1, df96s@meta.data$glycolysis1,df96s@active.ident, df96s@meta.data$seurat_clusters)
+
+scores_dfs <- rownames_to_column(scores_dfs,var="cell")
+
+colnames(scores_dfs) <- c("cell","oxphos", "glycolysis", "BRA_Intensity", "cluster")
+
+scores_dfs$delta <- scores_dfs$glycolysis - scores_dfs$oxphos 
+
+scores_dfs_reshape <- reshape2::melt(scores_dfs, measure.vars=c(2:3,6), variable.name="score")
+
+colnames(scores_dfs_reshape) <- c("cell","BRA_Intensity", "cluster", "module", "value")
+
