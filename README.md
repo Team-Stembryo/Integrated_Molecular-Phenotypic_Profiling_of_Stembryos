@@ -1,5 +1,5 @@
 # Integrated_Molecular-Phenotypic_Profiling_of_Stembryos
-This repository is a collection of all the code used to generate the data for the manuscript: 
+This repository is a collection of all the code used to perform the analysis for the manuscript: 
 
 [Integrated Molecular-Phenotypic Profiling Reveals Metabolic Control of Morphological Variation in Stembryos](https://doi.org/10.1101/2023.12.04.569921 )
 
