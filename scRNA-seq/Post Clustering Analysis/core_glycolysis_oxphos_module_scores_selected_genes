@@ -1,0 +1,80 @@
+mat  <- data.frame(
+    sample = df96@meta.data$Sample.barcode,
+    glycolysis = df96@meta.data$glycolysis1
+)
+
+# Aggregate the data by sample name, calculating the mean for each sample
+mat2 <- aggregate(. ~ sample, data = mat, FUN = mean)
+
+View(mat2)
+
+a <- AggregateExpression(df96, group.by ="Sample.barcode")$RNA
+
+# Assuming 'a' is the dataframe with RNA count values
+
+# Calculate the sum of counts for each sample
+sum_counts <- colSums(a)
+
+# Divide each count value by the respective sum of counts and multiply by 1 million
+a_cpm <- t(t(a) / sum_counts) * 1e6
+
+colSums(a_cpm)
+View(a_cpm)
+
+a_cpm <- t(a_cpm)
+
+View(mat2)
+
+# Get the current row names
+current_row_names <- rownames(a_cpm)
+
+# Extract the numeric part from the row names
+numeric_part <- as.numeric(gsub("Bar", "", current_row_names))
+
+# Sort the row names based on the numeric part
+sorted_row_names <- paste0("Bar", sort(numeric_part))
+
+# Reorder the rows of the matrix based on the sorted row names
+sorted_a_cpm <- a_cpm[sorted_row_names, ]
+
+View(sorted_a_cpm)
+
+View(mat2)
+
+mat3 <- cbind(mat2, sorted_a_cpm)
+
+View(mat3)
+
+mat3 <- mat3[,-1]
+
+selected_columns <-  c("Axin2", "Cdx4", "Wnt3a", "Sp5", "T")
+
+selected_columns <-  c("T","Tbx6","Wnt5a","Wnt5b","Wnt3a","Rspo3","Axin2", "Sp5", "Hes7","Hes5", "Hes1", "Dll1", "Dll3", "Fgf4","Fgf8","Fgf17", "Sox2","Sox1", "Irx1","Irx3","Fgfbp3","Pax6", "Cyp26a1", "Cdx2","Cdx4","Epha5", "Grsf1", "Hoxd9", "Hoxb9", "Hoxa9", "Hoxc9", "Wnt8a")
+
+# Order the DataFrame by the "delta_glycolysis_oxphos" column
+mat3_ordered <- mat3[order(mat3$glycolysis), ]
+
+# Subset the ordered DataFrame to include only the selected columns
+mat3_subset <- mat3_ordered[, c("glycolysis", selected_columns)]
+
+# Convert the data from wide format to long format using gather
+# Assuming mat3_subset is your original data frame
+mat3_long <- tidyr::gather(mat3_subset, key = "Variable", value = "Value", -1)
+
+# Now, long_df is the long dataframe with gene names as variables
+
+p1 <- ggplot(mat3_long, aes(x = glycolysis, y = Value, color = Variable)) +
+    geom_point(color = "black") +  # Make all dots black
+    geom_smooth(method = "lm", se = TRUE, color = "red") +  # Set the regression line to red
+    labs(x = "glycolysis1", y = "Normalized Value") +
+    theme_minimal() +
+    facet_wrap(~Variable, scales = "free", ncol = 5)  # Set ncol=5 for the facet grid
+
+# Load the ggplot2 package if you haven't already
+# library(ggplot2)
+
+# Specify the file path for the PDF output
+pdf_file_path <- "ms_cor_glycolysis_selected_genes"
+
+# Use ggsave to export the plot as a PDF
+ggsave(filename = pdf_file_path, plot = p1, device = "pdf")

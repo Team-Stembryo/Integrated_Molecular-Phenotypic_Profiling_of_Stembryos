@@ -1,0 +1,382 @@
+library(BiocManager)
+BiocManager::install("DESeq2")
+require(DESeq2)
+
+a <- AggregateExpression(df96, group.by ="Sample.barcode")$RNA
+
+# Assuming 'a' is the dataframe with RNA count values
+
+# Calculate the sum of counts for each sample
+sum_counts <- colSums(a)
+
+# Divide each count value by the respective sum of counts and multiply by 1 million
+a_cpm <- t(t(a) / sum_counts) * 1e6
+
+colSums(a_cpm)
+
+a <- a_cpm
+
+# Remove genes that are not expressed in any of the samples
+a_filt <- a[rowSums(a > 0) == ncol(a), ]
+
+# Remove genes with low expression in all samples
+
+a_filt2 <- a_filt[rowMeans(a_filt > 0.1) > 0, ]
+
+a_filt2 <- as.data.frame(a_filt2)
+
+means <- rowMeans(a_filt2)
+vars <- apply(a_filt2,1,var)
+cv2 <- vars/means^2
+par(mar=c(3.5,3.5,1,1),mgp=c(2,0.65,0),cex=0.9)
+smoothScatter(log(means),log(cv2))
+
+require(statmod)
+minMeanForFit <- unname( quantile( means[ which( cv2 > .3 ) ], .95 ) )
+useForFit <- means >= minMeanForFit # & spikeins
+fit <- glmgam.fit( cbind( a0 = 1, a1tilde = 1/means[useForFit] ),cv2[useForFit] )
+a0 <- unname( fit$coefficients["a0"] )
+a1 <- unname( fit$coefficients["a1tilde"])
+fit$coefficients
+
+# repeat previous plot
+par(mar=c(3.5,3.5,1,1),mgp=c(2,0.65,0),cex=0.9); smoothScatter(log(means),log(cv2));
+xg <- exp(seq( min(log(means[means>0])), max(log(means)), length.out=1000 ))
+vfit <- a1/xg + a0
+# add fit line
+lines( log(xg), log(vfit), col="black", lwd=3 )
+df <- ncol(a_filt2) - 1
+# add confidence interval
+lines(log(xg),log(vfit * qchisq(0.975,df)/df),lty=2,col="black")
+lines(log(xg),log(vfit * qchisq(0.025,df)/df),lty=2,col="black")
+
+afit <- a1/means+a0
+varFitRatio <- vars/(afit*means^2)
+varorder <- order(varFitRatio,decreasing=T)
+oed <- a_filt2[varorder,]
+
+
+# repeat previous plot
+par(mar=c(3.5,3.5,1,1),mgp=c(2,0.65,0),cex=0.9); smoothScatter(log(means),log(cv2)); lines( log(xg), log(vfit), col="black", lwd=3 ); lines(log(xg),log(vfit * qchisq(0.975,df)/df),lty=2,col="black"); lines(log(xg),log(vfit * qchisq(0.025,df)/df),lty=2,col="black");
+# add top 100 genes
+points(log(means[varorder[1:100]]),log(cv2[varorder[1:100]]),col=2)
+
+pval <- pchisq(varFitRatio*df,df=df,lower.tail=F)
+adj.pval <- p.adjust(pval,"fdr")
+sigVariedGenes <- adj.pval<1e-3;
+table(sigVariedGenes)
+
+
+ed <- a_filt2
+
+winsorize <- function (x, fraction=0.05) {
+    if(length(fraction) != 1 || fraction < 0 ||
+       fraction > 0.5) {
+        stop("bad value for 'fraction'")
+    }
+    lim <- quantile(x, probs=c(fraction, 1-fraction))
+    x[ x < lim[1] ] <- lim[1]
+    x[ x > lim[2] ] <- lim[2]
+    x
+}
+
+# winsorize to remove 2 most extreme cells (from each side)
+wed <- t(apply(ed, 1, winsorize, fraction=2/ncol(ed)))
+
+# now let's recalculate the most variable genes with the winsorized matrix (wed)
+means = rowMeans(wed); vars = apply(wed,1,var); cv2 <- vars/means^2
+useForFit <- means >= unname( quantile( means[ which( cv2 > .3 ) ], .95 ) ) 
+fit <- glmgam.fit( cbind( a0 = 1, a1tilde = 1/means[useForFit] ),cv2[useForFit] )
+afit <- fit$coef["a1tilde"]/means+fit$coef["a0"]
+vfit <- fit$coef["a1tilde"]/xg+fit$coef["a0"]
+varFitRatio <- vars/(afit*means^2)
+varorder <- order(varFitRatio,decreasing=T)
+oed <- wed[varorder,]
+# save for the next exercise
+# save(oed,file="oed_win.RData")
+
+xg <- exp(seq( min(log(means[means>0])), max(log(means)), length.out=1000 ))
+par(mar=c(3.5,3.5,1,1),mgp=c(2,0.65,0),cex=0.9); smoothScatter(log(means),log(cv2)); lines( log(xg), log(vfit), col="black", lwd=3 ); lines(log(xg),log(vfit * qchisq(0.975,df)/df),lty=2,col="black"); lines(log(xg),log(vfit * qchisq(0.025,df)/df),lty=2,col="black");
+# add top 100 genes
+points(log(means[varorder[1:100]]),log(cv2[varorder[1:100]]),col=2)
+
+varFitRatio_df <- as.data.frame(varFitRatio)
+
+# Get the indices of the top 100 genes
+top_100_indices <- varorder[1:100]
+
+# Get the gene names for the top 100 genes
+top_100_gene_names <- rownames(varFitRatio_df)[top_100_indices]
+
+# Add top 100 genes in blue
+points(log(means[top_100_indices]), log(cv2[top_100_indices]), col="blue", pch=19, cex=0.7)
+
+# Label the top 100 genes with their gene names
+text(log(means[top_100_indices]), log(cv2[top_100_indices]), labels=top_100_gene_names, pos=3, cex=0.7, col="blue")
+
+m <- oed[1:50,]
+heatmap(m/apply(m,1,max),zlim=c(0,1),col=gray.colors(100),Rowv=NA,Colv=NA,labRow=NA,scale="none",ColSideColors=ifelse(grepl("ES",colnames(m)),"red","blue"))
+
+
+library(ggplot2)
+library(ggrepel)
+
+# Define a vector of gene names to highlight
+highlight_genes <- c("T", "Fgf8", "Ldha", "Cdx2", "Rspo3", "Lef1", "Hes5", "Hes3", "Cyp26a1", "Wnt5b", "Hes7", "Sp5", "Cdx1", "Sox3", "Cdx4", "Sox1", "Aldh1a2", "Grsf1", "Tbx6", "Pcdh19", "Fgf4", "Nrarp", "Dppa5a", "Crabp1", "Hoxd9", "Dll1", "Dll3", "Grsf1", "Fgfr2","Fn1","Zfp42", "Pou5f1", "Nanog", "Irx3", "Slc2a1", "Lefty1", "Lefty2", "Cdx1", "Tdgf1", "Dppa3", "Fst", "Hoxb9", "Fst", "Ldhb")  # Replace with your gene names
+
+
+# Get the indices of the top 100 genes
+top_100_indices <- varorder[1:100]
+
+# Get the gene names for the top 100 genes
+varFitRatio_df <- as.data.frame(varFitRatio)
+top_100_gene_names <- rownames(varFitRatio_df)[top_100_indices]
+
+# Create a dataframe for the top 100 genes
+top_100_df <- data.frame(
+    x = log(means[top_100_indices]),
+    y = log(cv2[top_100_indices]),
+    label = top_100_gene_names,
+    highlight = top_100_gene_names %in% highlight_genes  # True for highlighted genes
+)
+
+# Create a scatter plot
+p <- ggplot(top_100_df, aes(x = x, y = y)) +
+    geom_point(aes(colour = "red"), shape = ifelse(top_100_df$highlight, 19, 1), size = ifelse(top_100_df$highlight, 5, 3)) +  # Hollow circles
+    geom_text_repel(
+        aes(label = label), 
+        nudge_x = 0, nudge_y = 0, max.overlaps=100, segment.color="transparent",
+        size = ifelse(top_100_df$highlight, 5, 3)  # Adjust font size
+    ) +
+    theme_minimal() +
+    labs(
+        x = "log(means)",
+        y = "CV2",
+        title = "Top 100 Genes: CV2 vs. log(means)"
+    )
+
+# Display the plot
+print(p)
+
+# Get the indices of the top 100 genes
+top_100_indices <- varorder[1:100]
+
+# Get the gene names for the top 100 genes
+top_100_gene_names <- rownames(varFitRatio_df)[top_100_indices]
+
+# Create a dataframe for the top 100 genes
+top_100_df <- data.frame(
+    x = log(means[top_100_indices]),
+    y = log(cv2[top_100_indices]),
+    label = top_100_gene_names
+)
+
+# Create a scatter plot
+p <- ggplot(top_100_df, aes(x = x, y = y)) +
+    geom_point(colour = "red", shape = 1, size = 3) +  # Shape 1 for hollow circles
+    geom_text_repel(aes(label = label), nudge_x = 0.1, nudge_y = 0.1, size = 3.5) +  # Adjust text size here
+    theme_minimal() +
+    labs(
+        x = "log(means)",
+        y = "CV2",
+        title = "Top 100 Genes: CV2 vs. log(means)"
+    )
+
+# Display the plot
+print(p)
+
+—————
+
+allgenes <- as.data.frame(rownames(oed))
+
+# Specify the file path where you want to save the gene names
+output_file <- "allgenes_120.txt"  # Change the file name as desired
+
+# Extract the gene names as a character vector
+gene_names <- allgenes$`rownames(oed)`
+
+# Write the gene names to a text file
+write.table(gene_names, file = output_file, row.names = FALSE, col.names = FALSE)
+
+# If you prefer a CSV file, you can use write.csv:
+# write.csv(gene_names, file = output_file, row.names = FALSE)
+
+# Print a message indicating the file has been saved
+cat("Gene names have been saved to", output_file, "\n")
+
+m <- oed[1:106,]
+
+vargenes <- as.data.frame(rownames(m))
+
+# Specify the file path where you want to save the gene names
+output_file <- "vargenes_120.txt"  # Change the file name as desired
+
+# Extract the gene names as a character vector
+gene_names <- vargenes$`rownames(m)`
+
+# Write the gene names to a text file
+write.table(gene_names, file = output_file, row.names = FALSE, col.names = FALSE)
+
+# If you prefer a CSV file, you can use write.csv:
+# write.csv(gene_names, file = output_file, row.names = FALSE)
+
+# Print a message indicating the file has been saved
+cat("Gene names have been saved to", output_file, "\n")
+
+require(WebGestaltR)
+
+go_results <- WebGestaltR(
+    enrichMethod = "ORA",
+    organism = "mmusculus",
+    enrichDatabase = c("geneontology_Biological_Process_noRedundant", "geneontology_Molecular_Function_noRedundant", "pathway_KEGG", "pathway_Panther"),
+    enrichDatabaseType = "genesymbol",
+    enrichDatabaseDescriptionFile = NULL,
+    interestGeneFile = "kmeans_df96_cluster1.txt",
+    interestGeneType = "genesymbol",
+    collapseMethod = "mean",
+    referenceGeneFile = "GO_reflist_df96.txt",
+    referenceGene = NULL,
+    referenceGeneType = "genesymbol",
+    referenceSet = NULL,
+    minNum = 3, maxNum = 500,
+    sigMethod = "fdr",
+    fdrMethod = "BH",
+    fdrThr = 1,
+    topThr = 10,
+    reportNum = 20,
+    perNum = 1000,
+    gseaP = 1,
+    isOutput = TRUE,
+    outputDirectory = getwd(),
+    projectName = NULL,
+    dagColor = "continuous",
+    saveRawGseaResult = FALSE,
+    gseaPlotFormat = c("png", "svg"),
+    setCoverNum = 10,
+    networkConstructionMethod = NULL,
+    neighborNum = 10,
+    highlightType = "Seeds",
+    highlightSeedNum = 10,
+    nThreads = 1,
+    cache = NULL,
+    hostName = "https://www.webgestalt.org/",
+)
+—— 
+
+# Assuming your dataframe is named go_results_120
+
+# Create a new dataframe with rows containing "signaling" in the description
+filtered_go_results <- subset(go_results_120, grepl("signaling", description, ignore.case = TRUE))
+
+# Print the first few rows of the filtered dataframe
+head(filtered_go_results)
+
+# If you want to reset the row indices of the new dataframe
+filtered_go_results <- droplevels(filtered_go_results)
+
+# Now, 'filtered_go_results' contains only rows with "signaling" in the description
+
+—
+
+# Create a new dataframe with rows that meet the specified conditions
+filtered_go_results <- go_results_120[go_results_120$database == "geneontology_Biological_Process_noRedundant" & go_results_120$FDR < 0.05, ]
+
+# Print the first few rows of the filtered dataframe
+head(filtered_go_results)
+
+# If you want to reset the row indices of the new dataframe
+filtered_go_results <- droplevels(filtered_go_results)
+
+# Now, 'filtered_go_results' contains only rows that meet the conditions
+
+# Create a new dataframe with rows containing the specified keywords in the description
+filtered_go_results <- subset(go_results_120, grepl("mesoderm|somite|neural tube|spinal cord|developmental induction|gastrulation", description, ignore.case = TRUE))
+
+# Print the first few rows of the filtered dataframe
+head(filtered_go_results)
+
+# If you want to reset the row indices of the new dataframe
+filtered_go_results <- droplevels(filtered_go_results)
+
+# Now, 'filtered_go_results' contains only rows with the specified keywords in the description
+
+# Add a new column to indicate if a row is in filtered_go_results
+go_results_120$is_in_filtered <- go_results_120$description %in% filtered_go_results$description
+
+
+# Add a new column to indicate if a row is in filtered_go_results
+go_results_120$is_in_filtered <- go_results_120$description %in% filtered_go_results$description
+
+# Create the scatter plot
+plot <- ggplot(go_results_120, aes(x = log10(enrichmentRatio), y = -log10(FDR))) + # Flip the y-axis
+    geom_point(aes(size = -log10(FDR), color = is_in_filtered), alpha = 0.7) + # Size and color scaled
+    scale_color_manual(values = c("FALSE" = "grey", "TRUE" = "red")) + # Define color mapping
+    labs(
+        x = "log10(Enrichment Ratio)",
+        y = "-log10(FDR)", # Adjusted y-axis label
+        title = "120h"
+    ) +
+    scale_size_continuous(range = c(0.2, 5)) +  # Adjust size range as needed
+    theme_classic2() + geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") + geom_vline(xintercept = log10(2), linetype = "dashed", color = "black") 
+
+# Label the highlighted processes using ggrepel
+highlighted_labels <- filtered_go_results$description
+plot <- plot + geom_text_repel(
+    aes(label = ifelse(description %in% highlighted_labels, as.character(description), "")),
+    size = 4, color = "red", max.overlaps=100
+)
+
+# Print the plot
+print(plot)
+
+——
+
+# Create a new dataframe with rows that meet the specified conditions
+filtered_go_results_BP <- go_results_120[go_results_120$database == "geneontology_Biological_Process_noRedundant", ]
+
+# Print the first few rows of the filtered dataframe
+head(filtered_go_results_BP)
+
+# If you want to reset the row indices of the new dataframe
+filtered_go_results_BP <- droplevels(filtered_go_results_BP)
+
+# Now, 'filtered_go_results' contains only rows that meet the conditions
+
+# Create a new dataframe with rows containing the specified keywords in the description
+filtered_go_results <- subset(filtered_go_results_BP, grepl("mesoderm|somite|neural tube|spinal cord|developmental induction|gastrulation", description, ignore.case = TRUE))
+
+# Print the first few rows of the filtered dataframe
+head(filtered_go_results)
+
+# If you want to reset the row indices of the new dataframe
+filtered_go_results <- droplevels(filtered_go_results)
+
+# Now, 'filtered_go_results' contains only rows with the specified keywords in the description
+
+# Add a new column to indicate if a row is in filtered_go_results
+filtered_go_results_BP$is_in_filtered <- filtered_go_results_BP$description %in% filtered_go_results$description
+
+# Add a new column to indicate if a row is in filtered_go_results
+filtered_go_results_BP$is_in_filtered <- filtered_go_results_BP$description %in% filtered_go_results$description
+
+# Create the scatter plot
+plot <- ggplot(filtered_go_results_BP, aes(x = log10(enrichmentRatio), y = -log10(FDR))) + # Flip the y-axis
+    geom_point(aes(size = -log10(FDR), color = is_in_filtered), alpha = 0.7) + # Size and color scaled
+    scale_color_manual(values = c("FALSE" = "grey", "TRUE" = "red")) + # Define color mapping
+    labs(
+        x = "log10(Enrichment Ratio)",
+        y = "-log10(FDR)", # Adjusted y-axis label
+        title = "120h"
+    ) +
+    scale_size_continuous(range = c(0.2, 5)) +  # Adjust size range as needed
+    theme_classic2() + geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") + geom_vline(xintercept = log10(2), linetype = "dashed", color = "black") 
+
+# Label the highlighted processes using ggrepel
+highlighted_labels <- filtered_go_results$description
+plot <- plot + geom_text_repel(
+    aes(label = ifelse(description %in% highlighted_labels, as.character(description), "")),
+    size = 4, color = "red", max.overlaps=100
+)
+
+# Print the plot
+print(plot)

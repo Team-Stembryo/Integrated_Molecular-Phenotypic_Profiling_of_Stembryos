@@ -1,0 +1,81 @@
+library(ggplot2)
+library(gridExtra)
+library(dplyr)
+require(ggpubr)
+
+# Assuming you have a Seurat object named df96s
+
+# Extract the desired columns from the Seurat object's metadata
+data_df <- data.frame(
+  Sample.barcode = df96s@meta.data$Sample.barcode,
+  Intensity_MeanIntensity = df96s@meta.data$X072h_raw_CH__bf_mask_Intensity_MeanIntensity
+,
+  glycolysis1 = df96s@meta.data$glycolysis1,
+  oxphos1 = df96s@meta.data$oxphos1
+)
+
+# Print the resulting dataframe
+print(data_df)
+
+# Assuming you have the data_df dataframe created earlier
+
+# Calculate the average values per Sample.barcode
+averages_df <- data_df %>%
+  group_by(Sample.barcode) %>%
+  summarise_at(vars(Intensity_MeanIntensity, glycolysis1, oxphos1), mean, na.rm = TRUE)
+
+# Print the resulting dataframe
+print(averages_df)
+
+
+# Assuming you have the averages_df dataframe created earlier
+
+# Correlation plot: Intensity_MeanIntensity vs. glycolysis1
+correlation_plot_glycolysis <- ggplot(averages_df, aes(x = Intensity_MeanIntensity, y = glycolysis1)) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "blue") +
+  stat_cor(method = "pearson", label.x = 0.8, label.y = 0.9) +
+  labs(title = "Correlation: Intensity vs. Glycolysis", x = "Intensity_MeanIntensity", y = "glycolysis1")
+
+# Correlation plot: Intensity_MeanIntensity vs. oxphos1
+correlation_plot_oxphos <- ggplot(averages_df, aes(x = Intensity_MeanIntensity, y = oxphos1)) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "blue") +
+  stat_cor(method = "pearson", label.x = 0.8, label.y = 0.9) +
+  labs(title = "Correlation: Intensity vs. Oxphos", x = "Intensity_MeanIntensity", y = "oxphos1")
+
+# Combine the plots and print
+combined_plots <- grid.arrange(correlation_plot_glycolysis, correlation_plot_oxphos, ncol = 2)
+print(combined_plots)
+
+# Calculate custom label positions
+label_y_position_glyco <- max(averages_df$glycolysis1, na.rm = TRUE) + 0.01
+label_x_position <- min(averages_df$Intensity_MeanIntensity, na.rm = TRUE)
+label_y_position_oxphos <- max(averages_df$oxphos1, na.rm = TRUE) + 0.01
+
+# Remove the grey grid lines
+remove_grid_theme <- theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+
+# Correlation plot: Intensity_MeanIntensity vs. glycolysis1
+correlation_plot_glycolysis <- ggplot(averages_df, aes(x = Intensity_MeanIntensity, y = glycolysis1)) +
+    geom_point() +
+    geom_smooth(method = "lm", color = "red") +
+    stat_cor(method = "pearson", label.x = label_x_position, label.y = label_y_position_glyco) +
+    labs(title = "Correlation: Intensity vs. Glycolysis", x = "Intensity_MeanIntensity", y = "glycolysis1") +
+    theme_minimal() +
+    remove_grid_theme +  # Apply the grid removal theme
+    theme(panel.background = element_rect(fill = "white"))  # Set background to white
+
+# Correlation plot: Intensity_MeanIntensity vs. oxphos1
+correlation_plot_oxphos <- ggplot(averages_df, aes(x = Intensity_MeanIntensity, y = oxphos1)) +
+    geom_point() +
+    geom_smooth(method = "lm", color = "red") +
+    stat_cor(method = "pearson", label.x = label_x_position, label.y = label_y_position_oxphos) +
+    labs(title = "Correlation: Intensity vs. Oxphos", x = "Intensity_MeanIntensity", y = "oxphos1") +
+    theme_minimal() +
+    remove_grid_theme +  # Apply the grid removal theme
+    theme(panel.background = element_rect(fill = "white"))  # Set background to white
+
+# Combine the plots and print
+combined_plots <- grid.arrange(correlation_plot_glycolysis, correlation_plot_oxphos, ncol = 2)
+print(combined_plots)

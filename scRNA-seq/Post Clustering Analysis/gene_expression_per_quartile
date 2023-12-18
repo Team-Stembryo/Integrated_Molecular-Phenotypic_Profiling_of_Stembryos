@@ -1,0 +1,37 @@
+## for [Intensity]-TmCH 96h
+
+quantile(df96@meta.data$X096h_raw_CH_bra_mask_Intensity_MeanIntensity, prob = seq(0, 1, length = 5), type = 5)
+
+df96@meta.data$BRA_Intensity <- '4'
+df96@meta.data$BRA_Intensity[which(df96@meta.data$X096h_raw_CH_bra_mask_Intensity_MeanIntensity < 30.06601)] <- '3'
+df96@meta.data$BRA_Intensity[which(df96@meta.data$X096h_raw_CH_bra_mask_Intensity_MeanIntensity < 26.83593)] <- '2'
+df96@meta.data$BRA_Intensity[which(df96@meta.data$X096h_raw_CH_bra_mask_Intensity_MeanIntensity < 24.16301)] <- '1'
+
+Idents(df96) <- "BRA_Intensity"
+
+Idents(df96) <- "seurat_clusters"
+
+df96s <- subset(df96, idents= "1")
+
+selected_genes <- c("Pfkl", "Pkm", "Pgk1", "Gapdh", "Pgam1", "Tpi1", "Eno1", "Ldha", "Aldoa", "Hk1", "Hk2", "Slc2a1", "Slc2a3")  # Replace with your gene names of interest
+
+DotPlot(df96s,  features = selected_genes,  group.by = "BRA_Intensity", cols ="PRGn")  + RotatedAxis()
+
+## for [Fraction]-TmCH 96h
+
+quantile(df96@meta.data$X096h_raw_CH_AreaShape_Bra_AreaFraction, prob = seq(0, 1, length = 5), type = 5)
+
+df96@meta.data$BRA_Fraction <- '4'
+df96@meta.data$BRA_Fraction[which(df96@meta.data$X096h_raw_CH_AreaShape_Bra_AreaFraction < 0.8340428)] <- '3'
+df96@meta.data$BRA_Fraction[which(df96@meta.data$X096h_raw_CH_AreaShape_Bra_AreaFraction < 0.7547818)] <- '2'
+df96@meta.data$BRA_Fraction[which(df96@meta.data$X096h_raw_CH_AreaShape_Bra_AreaFraction < 0.6340263)] <- '1'
+
+Idents(df96) <- "BRA_Fraction"
+
+Idents(df96) <- "seurat_clusters"
+
+df96s <- subset(df96, idents= "1")
+
+selected_genes <- c("Pfkl", "Pkm", "Pgk1", "Gapdh", "Pgam1", "Tpi1", "Eno1", "Ldha", "Aldoa", "Hk1", "Hk2", "Slc2a1", "Slc2a3")  # Replace with your gene names of interest
+
+DotPlot(df96s,  features = selected_genes,  group.by = "BRA_Intensity", cols ="PRGn")  + RotatedAxis()
