@@ -8,7 +8,7 @@ mat2 <- aggregate(. ~ sample, data = mat, FUN = mean)
 
 View(mat2)
 
-a <- AggregateExpression(df96, group.by ="Sample.barcode")$RNA
+a <- AggregateExpression(df96, group.by ="Sample.barcode", slot="counts", assay="RNA")$RNA
 
 # Assuming 'a' is the dataframe with RNA count values
 
