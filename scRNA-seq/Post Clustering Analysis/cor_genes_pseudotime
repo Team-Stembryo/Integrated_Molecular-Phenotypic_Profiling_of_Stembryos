@@ -1,32 +1,3 @@
-# Add pseudotime information to the metadata of the Seurat object (df48)
-## follow same procedure for other timepoints
-
-df48 <- AddMetaData(
-    object = df48,
-    metadata = cds@principal_graph_aux@listData$UMAP$pseudotime,
-    col.name = "pseudotime"
-)
-
-barcode_counts <- table(df48@meta.data$Sample.barcode)
-selected_barcodes <- names(barcode_counts[barcode_counts > 20])
-
-# First, convert selected_barcodes to a character vector
-selected_barcodes <- as.character(selected_barcodes)
-
-# Next, subset the metadata of df72c to only include samples with Sample.barcode in selected_barcodes
-selected_samples <- df48@meta.data$Sample.barcode %in% selected_barcodes
-df48_sub <- df48[,selected_samples]
-
-# Aggregate gene expression data for each sample
-a <- AggregateExpression(df48_sub, group.by = "Sample.barcode")$RNA
-
-# Calculate counts per million (CPM) and normalize
-sum_counts <- colSums(a)
-a_cpm <- t(t(a) / sum_counts) * 1e6
-
-# Display total counts per sample
-colSums(a_cpm)
-
 # Create a matrix (mat) with pseudotime and sample information
 t <- as.numeric(df48_sub@meta.data$pseudotime)
 s <- df48_sub@meta.data$Sample.barcode
