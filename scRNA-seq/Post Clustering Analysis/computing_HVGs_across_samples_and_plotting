@@ -1,23 +1,7 @@
-library(BiocManager)
-BiocManager::install("DESeq2")
-require(DESeq2)
-
-a <- AggregateExpression(df96, group.by ="Sample.barcode")$RNA
-
-# Assuming 'a' is the dataframe with RNA count values
-
-# Calculate the sum of counts for each sample
-sum_counts <- colSums(a)
-
-# Divide each count value by the respective sum of counts and multiply by 1 million
-a_cpm <- t(t(a) / sum_counts) * 1e6
-
-colSums(a_cpm)
-
-a <- a_cpm
+# starting with CPM matrix a_cpm
 
 # Remove genes that are not expressed in any of the samples
-a_filt <- a[rowSums(a > 0) == ncol(a), ]
+a_filt <- a_cpm[rowSums(a_cpm > 0) == ncol(a_cpm), ]
 
 # Remove genes with low expression in all samples
 
